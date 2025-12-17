@@ -74,13 +74,15 @@ class HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMi
                     onTap: (){
                       context.push(PathRouter.LOGIN_SCREEN);
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
-                      child: UnitText(
-                        text: "Login",
-                        fontSize: 15,
-                        color: Colors.white,
-                        fontFamily: Assets.SfProMedium,
+                    child: Container(color: Colors.transparent,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+                        child: UnitText(
+                          text: "Đăng nhập",
+                          fontSize: 15,
+                          color: Colors.white,
+                          fontFamily: Assets.SfProMedium,
+                        ),
                       ),
                     ),
                   ),

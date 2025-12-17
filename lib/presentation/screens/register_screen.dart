@@ -58,8 +58,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 50),
                   child: TextField(
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    keyboardType: TextInputType.text,
+                    //inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     style: TextStyle(color: Colors.black, fontSize: 14, fontFamily: Assets.SfProRegular),
                     decoration: InputDecoration(
                       hintText: 'Nhập họ và tên',
@@ -96,6 +96,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 UnitText(text: "Đăng ký thành viên miễn phí"),
                 GestureDetector(
                     onTap: () {
+                      FocusScope.of(context).unfocus();
                       Navigator.of(context).pop();
                     },
                     child: Container(color:Colors.transparent,child: UnitText(text: " Đăng nhập tại đây", color: AppColors.colorButtonHome, underline: true))),
