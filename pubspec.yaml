@@ -1,0 +1,68 @@
+name: remindbless
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.10.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  lucide_icons: ^0.257.0
+  flutter_svg: ^2.2.1
+  pull_to_refresh: ^2.0.0
+  mobkit_dashed_border: ^0.0.8
+  carousel_slider: ^5.1.1
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/fonts/
+
+  fonts:
+    - family: SfProBold
+      fonts:
+        - asset: assets/fonts/SfProBold.otf
+
+    - family: SfProMedium
+      fonts:
+        - asset: assets/fonts/SfProMedium.otf
+
+    - family: SfProLight
+      fonts:
+        - asset: assets/fonts/SfProLight.otf
+
+
+    - family: SfProThin
+      fonts:
+        - asset: assets/fonts/SfProThin.otf
+
+
+    - family: SfProRegular
+      fonts:
+        - asset: assets/fonts/SfProRegular.otf
+
+    - family: SfProSemibold
+      fonts:
+        - asset: assets/fonts/SF-Pro-Display-Semibold.otf
+
+    - family: SfProBoldItalic
+      fonts:
+        - asset: assets/fonts/SF-Pro-Display-BoldItalic.otf
+
+    - family: SfProBlackItalic
+      fonts:
+        - asset: assets/fonts/SF-Pro-Display-BlackItalic.otf
+
+    - family: SfProMediumItalic
+      fonts:
+        - asset: assets/fonts/SF-Pro-Display-MediumItalic.otf

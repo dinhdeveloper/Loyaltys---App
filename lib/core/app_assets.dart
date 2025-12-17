@@ -1,0 +1,58 @@
+class Assets{
+  Assets._();
+  static const String SfProBold = 'SfProBold';
+  static const String SfProMedium = 'SfProMedium';
+  static const String SfProLight = 'SfProLight';
+  static const String SfProRegular = 'SfProRegular';
+  static const String SfProThin = 'SfProThin';
+  static const String SfProSemibold = 'SfProSemibold';
+  static const String SfProBoldItalic = 'SfProBoldItalic';
+  static const String SfProBlackItalic = 'SfProBlackItalic';
+  static const String SfProMediumItalic = 'SfProMediumItalic';
+  static const String imgQrCode = 'assets/images/imgQrCode.png';
+  static const String imgBG = 'assets/images/imgBg.jpg';
+  static const String imgFoodItem = 'assets/images/img_food_item.jpg';
+  static const String imgBanner1 = 'assets/images/img_banner.png';
+  static const String imgBanner2 = 'assets/images/img_banner_2.png';
+  static const String imgBanner3 = 'assets/images/img_banner_3.png';
+  static const String imgBanner4 = 'assets/images/img_banner_4.png';
+  static const String imgBanner5 = 'assets/images/img_banner_5.png';
+  static const String imgBgOpen = 'assets/images/bg_open.jpg';
+  static const String imgBanner = 'assets/images/banner_app.png';
+  static const String imgMegaSale = 'assets/images/mega_sale.png';
+  static const String iconScanQR = 'assets/images/qr_code.svg';
+  static const String iconHome = 'assets/images/home.svg';
+  static const String iconProfile = 'assets/images/profile.svg';
+  static const String iconSearch = 'assets/images/search.svg';
+  static const String iconSearchHome = 'assets/images/search_home.svg';
+  static const String iconDown = 'assets/images/icon_down.svg';
+  static const String iconNoti = 'assets/images/icon_noti.svg';
+  static const String iconTicket = 'assets/images/icon_ticket.svg';
+  static const String iconWallet = 'assets/images/icon_wallet.svg';
+  static const String iconCoffeeMenu = 'assets/images/coffee_menu.png';
+  static const String iconCoffeeCup = 'assets/images/coffee_cup.png';
+  static const String iconCoffee2 = 'assets/images/cofee_2.png';
+  static const String iconLatteArt = 'assets/images/latte_art.png';
+  static const String iconSignpostSale = 'assets/images/signpost_sale.png';
+  static const String iconChocolate = 'assets/images/chocolate_cake.png';
+  static const String iconFood = 'assets/images/food_pasta.png';
+  static const String iconColdCoffeeCup = 'assets/images/cold_coffee_cup.png';
+  static const String iconIceCream = 'assets/images/ice_cream.png';
+  static const String iconFloat = 'assets/images/float.png';
+  static const String iconSalat = 'assets/images/salat.png';
+  static const String iconSoftDrinks3d = 'assets/images/soft_drinks_3d.png';
+  static const String iconReceptionBell = 'assets/images/reception_bell.png';
+  static const String imgDemoFood = 'assets/images/img_demo_food.jpg';
+  static const String imgBackgroundApp = 'assets/images/background_app.jpg';
+
+  static const String imgHamburger = 'assets/images/hamburger.png';
+  static const String imgBuritto = 'assets/images/imgBuritto.png';
+  static const String imgCake = 'assets/images/imgCake.png';
+  static const String imgCarrotJuice = 'assets/images/carrot_juice.png';
+  static const String imgSpoghetti = 'assets/images/imgSpoghetti.png';
+
+  static const String imgViewCoffeeCup = 'assets/images/view_coffee_cup.jpg';
+  static const String imgJuiceCategory = 'assets/images/imgJuiceCategory.jpg';
+  static const String imgFoodDesserts = 'assets/images/food_desserts.jpg';
+  static const String imgSnacksSideDishes = 'assets/images/imgSnacksSideDishes.jpg';
+}
