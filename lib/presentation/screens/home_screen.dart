@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:remindbless/core/app_assets.dart';
+import 'package:remindbless/core/app_routes.dart';
 import 'package:remindbless/core/app_theme.dart';
+import 'package:remindbless/core/path_router.dart';
+import 'package:remindbless/data/models/data_home.dart';
 import 'package:remindbless/presentation/screens/extension_screen/extension_home_two_screen.dart';
+import 'package:remindbless/presentation/screens/setting_screen.dart';
 import 'package:remindbless/presentation/widgets/common/unit_text.dart';
 import 'extension_screen/extension_home_child_screen.dart';
 import 'extension_screen/extension_home_screen.dart';
@@ -14,8 +19,7 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => HomeScreenState();
 }
 
-class HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
+class HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
 
   late TabController tabController;
   final tabs = ["Dành cho bạn", "Ưu đãi đỉnh"];
@@ -25,6 +29,19 @@ class HomeScreenState extends State<HomeScreen>
     super.initState();
     tabController = TabController(length: tabs.length, vsync: this);
   }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    for (final img in banners) {
+      precacheImage(AssetImage(img), context);
+    }
+
+    for (final img in itemsHomeCategory) {
+      precacheImage(AssetImage(img.assetPath), context);
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +60,31 @@ class HomeScreenState extends State<HomeScreen>
             /// ====== TÊN QUÁN ======
             Padding(
               padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
-              child: UnitText(
-                text: "DinhTC Coffee",
-                fontSize: 20,
-                color: Colors.white,
-                fontFamily: Assets.SfProBlackItalic,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  UnitText(
+                    text: "DinhTC Coffee",
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontFamily: Assets.SfProBlackItalic,
+                  ),
+
+                  GestureDetector(
+                    onTap: (){
+                      context.push(PathRouter.LOGIN_SCREEN);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+                      child: UnitText(
+                        text: "Login",
+                        fontSize: 15,
+                        color: Colors.white,
+                        fontFamily: Assets.SfProMedium,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
 

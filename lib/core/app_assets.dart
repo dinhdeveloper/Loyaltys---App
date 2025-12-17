@@ -50,6 +50,7 @@ class Assets{
   static const String imgCake = 'assets/images/imgCake.png';
   static const String imgCarrotJuice = 'assets/images/carrot_juice.png';
   static const String imgSpoghetti = 'assets/images/imgSpoghetti.png';
+  static const String imgCoffeeSignBoard = 'assets/images/coffee_sign_board.png';
 
   static const String imgViewCoffeeCup = 'assets/images/view_coffee_cup.jpg';
   static const String imgJuiceCategory = 'assets/images/imgJuiceCategory.jpg';

@@ -12,6 +12,7 @@ class UnitText extends StatelessWidget {
   final TextAlign? textAlign;
   final TextOverflow? overflow;
   final bool? lineThrough;
+  final bool? underline;
   final Color? lineThroughColor;
 
   const UnitText({
@@ -26,11 +27,19 @@ class UnitText extends StatelessWidget {
     this.maxLines,
     this.overflow,
     this.lineThrough = false,
+    this.underline = false,
     this.lineThroughColor,
   });
 
   @override
   Widget build(BuildContext context) {
+    TextDecoration decoration = TextDecoration.none;
+
+    if (lineThrough == true) {
+      decoration = TextDecoration.lineThrough;
+    } else if (underline == true) {
+      decoration = TextDecoration.underline;
+    }
     return Text(
       text,
       textAlign: textAlign ?? TextAlign.start,
@@ -42,7 +51,8 @@ class UnitText extends StatelessWidget {
         fontFamily: fontFamily ?? Assets.SfProRegular,
         fontWeight: fontWeight ?? FontWeight.w400,
         color: color ?? Colors.black,
-        decoration: lineThrough == true ? TextDecoration.lineThrough : TextDecoration.none,
+        decoration: decoration,
+        //decoration: lineThrough == true ? TextDecoration.lineThrough : TextDecoration.none,
         decorationColor: lineThroughColor ?? (color ?? Colors.black),
         decorationThickness: 0.8,
       ),

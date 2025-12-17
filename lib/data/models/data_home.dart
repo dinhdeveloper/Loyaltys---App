@@ -36,3 +36,11 @@ final List<Map<String, dynamic>> itemsCategoryYouChoose = [
   {"title": "ĐỒ ĂN – BÁNH NGỌT", "imageUrl": Assets.imgFoodDesserts},
   {"title": "ĂN VẶT - ĂN KÈM", "imageUrl": Assets.imgSnacksSideDishes}
 ];
+
+final banners = [
+  Assets.imgBanner1,
+  Assets.imgBanner2,
+  Assets.imgBanner3,
+  Assets.imgBanner4,
+  Assets.imgBanner5,
+];

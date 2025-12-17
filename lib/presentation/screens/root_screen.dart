@@ -7,6 +7,7 @@ import 'package:remindbless/presentation/screens/add_remind_screen.dart';
 import 'package:remindbless/presentation/screens/setting_screen.dart';
 import 'package:remindbless/presentation/widgets/common/unit_text.dart';
 
+import 'barcode_scanner_screen.dart';
 import 'home_screen.dart';
 
 class RootScreen extends StatefulWidget {
@@ -25,7 +26,7 @@ class _RootScreenState extends State<RootScreen> {
     final screens = [
       HomeScreen(key: _homeKey),
       AddRemindScreen(),
-      SettingScreen(),
+      BarcodeScannerScreen(),
       SettingScreen(),
     ];
 

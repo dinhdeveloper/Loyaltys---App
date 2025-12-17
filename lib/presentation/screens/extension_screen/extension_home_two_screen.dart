@@ -63,6 +63,7 @@ extension ExtensionHomeTwoScreen on HomeScreenState{
       margin: const EdgeInsets.symmetric(vertical: 15,horizontal: 15),
       child: GridView.builder(
         padding: const EdgeInsets.only(bottom: 90),
+        shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,

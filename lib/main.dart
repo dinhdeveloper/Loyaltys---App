@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:remindbless/presentation/screens/notification_list_screen.dart';
 import 'package:remindbless/presentation/screens/root_screen.dart';
+
+import 'core/go_router.dart';
 
 void main() {
   runApp(const MainApp());
@@ -10,9 +13,17 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       debugShowCheckedModeBanner: false,
-      home: RootScreen(),
     );
   }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return const MaterialApp(
+  //     debugShowCheckedModeBanner: false,
+  //     home: NotificationListScreen(),
+  //   );
+  // }
 }

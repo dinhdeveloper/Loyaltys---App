@@ -1,7 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:remindbless/core/app_assets.dart';
+import 'package:remindbless/core/path_router.dart';
 import 'package:remindbless/data/models/data_home.dart';
 import 'package:remindbless/presentation/screens/home_screen.dart';
 import 'package:remindbless/presentation/widgets/common/unit_text.dart';
@@ -26,34 +28,42 @@ extension ExHomeScreen on HomeScreenState{
           Row(children: [
             SvgPicture.asset(Assets.iconSearchHome),
             const SizedBox(width: 10),
-            Stack(
-              clipBehavior: Clip.none,
-              children: [
-                SvgPicture.asset(Assets.iconNoti),
+            GestureDetector(
+              onTap: (){
+                context.push(PathRouter.NOTIFICATION_LIST_SCREEN);
+              },
+              child: Container(
+                color: Colors.transparent,
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    SvgPicture.asset(Assets.iconNoti),
 
-                Positioned(
-                  top: -3,
-                  right: -3,
-                  child: Container(
-                    padding: const EdgeInsets.all(2),
-                    decoration: const BoxDecoration(
-                      color: Colors.red, shape: BoxShape.circle,
-                      border: Border.fromBorderSide(
-                        BorderSide(color: Colors.white, width: 1.5),
-                      ),
-                    ),
-                    constraints: const BoxConstraints(minWidth: 14, minHeight: 14),
-                    child: Center(
-                      child: Text(
-                        '3',
-                        style: TextStyle(
-                          color: Colors.white, fontSize: 8, fontWeight: FontWeight.bold, height: 1.1,
+                    Positioned(
+                      top: -3,
+                      right: -3,
+                      child: Container(
+                        padding: const EdgeInsets.all(2),
+                        decoration: const BoxDecoration(
+                          color: Colors.red, shape: BoxShape.circle,
+                          border: Border.fromBorderSide(
+                            BorderSide(color: Colors.white, width: 1.5),
+                          ),
+                        ),
+                        constraints: const BoxConstraints(minWidth: 14, minHeight: 14),
+                        child: Center(
+                          child: Text(
+                            '3',
+                            style: TextStyle(
+                              color: Colors.white, fontSize: 8, fontWeight: FontWeight.bold, height: 1.1,
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ]),
         ],
@@ -137,13 +147,6 @@ extension ExHomeScreen on HomeScreenState{
   }
 
   Widget bannerHomeWidget() {
-    final banners = [
-      Assets.imgBanner1,
-      Assets.imgBanner2,
-      Assets.imgBanner3,
-      Assets.imgBanner4,
-      Assets.imgBanner5,
-    ];
     return CarouselSlider(
       items: banners.map((img) {
         return Padding(
