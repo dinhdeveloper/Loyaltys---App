@@ -35,6 +35,7 @@ class Assets{
   static const String iconHistory = 'assets/images/icon_history.svg';
   static const String iconEditProfile = 'assets/images/icon_edit_profile.svg';
   static const String iconHandPointer = 'assets/images/icon_pointer.svg';
+  static const String iconCloseBack = 'assets/images/icon_close_back.svg';
   static const String iconCoffeeMenu = 'assets/images/coffee_menu.png';
   static const String iconCoffeeCup = 'assets/images/coffee_cup.png';
   static const String iconCoffee2 = 'assets/images/cofee_2.png';

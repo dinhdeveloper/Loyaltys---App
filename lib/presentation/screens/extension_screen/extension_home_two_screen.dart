@@ -33,6 +33,7 @@ extension ExtensionHomeTwoScreen on HomeScreenState{
                       child: Image.asset(
                         item["imageUrl"],
                         fit: BoxFit.cover,
+                        cacheWidth: 1080,
                       ),
                     ),
 

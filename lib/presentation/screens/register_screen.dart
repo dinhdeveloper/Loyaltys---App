@@ -34,10 +34,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 50),
                   child: TextField(
                     keyboardType: TextInputType.number,
+                    maxLength: 10,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     style: TextStyle(color: Colors.black, fontSize: 14, fontFamily: Assets.sfProRegular),
                     decoration: InputDecoration(
                       hintText: 'Nhập số điện thoại',
+                      counterText: '',
                       hintStyle: TextStyle(color: Colors.black.withOpacity(0.8), fontFamily: Assets.sfProRegular),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(40),

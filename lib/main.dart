@@ -16,12 +16,4 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
     );
   }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return const MaterialApp(
-  //     debugShowCheckedModeBanner: false,
-  //     home: NotificationListScreen(),
-  //   );
-  // }
 }

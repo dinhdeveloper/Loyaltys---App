@@ -15,6 +15,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController phoneController = TextEditingController();
+  bool _isPhoneInvalid = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,19 +38,30 @@ class _LoginScreenState extends State<LoginScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 50),
                   child: TextField(
+                    controller: phoneController,
                     keyboardType: TextInputType.number,
+                    maxLength: 10,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     style: TextStyle(color: Colors.black, fontSize: 14, fontFamily: Assets.sfProRegular),
+                    onChanged: (valuePhone) {
+                      // Khi user sửa lại số → bỏ trạng thái lỗi
+                      if (_isPhoneInvalid && valuePhone.length <= 10) {
+                        setState(() {
+                          _isPhoneInvalid = false;
+                        });
+                      }
+                    },
                     decoration: InputDecoration(
                       hintText: 'Nhập số điện thoại',
+                      counterText: '',
                       hintStyle: TextStyle(color: Colors.black.withOpacity(0.8), fontFamily: Assets.sfProRegular),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(40),
-                        borderSide: const BorderSide(color: Colors.grey, width: 1),
+                        borderSide: BorderSide(color: _isPhoneInvalid ? Colors.red : Colors.grey, width: 1),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(40),
-                        borderSide: const BorderSide(color: Colors.grey, width: 1),
+                        borderSide: BorderSide(color: _isPhoneInvalid ? Colors.red : Colors.grey, width: 1),
                       ),
                       contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                     ),
@@ -57,14 +71,34 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 const SizedBox(height: 16),
 
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 50),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 46,
-                    decoration: BoxDecoration(color: AppColors.colorButtonHome, borderRadius: BorderRadius.circular(23)),
-                    alignment: Alignment.center,
-                    child: const UnitText(text: "Đăng nhập", fontSize: 16),
+                GestureDetector(
+                  onTap: () {
+                    final phone = phoneController.text.trim();
+
+                    if (phone.length != 10) {
+                      // Sai → đổi border đỏ
+                      setState(() {
+                        _isPhoneInvalid = true;
+                      });
+                      return;
+                    }
+
+                    // Đúng → reset lỗi & qua màn OTP
+                    setState(() {
+                      _isPhoneInvalid = false;
+                    });
+
+                    context.go(PathRouter.verifyOtpScreen);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 50),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 46,
+                      decoration: BoxDecoration(color: AppColors.colorButtonHome, borderRadius: BorderRadius.circular(23)),
+                      alignment: Alignment.center,
+                      child: const UnitText(text: "Đăng nhập", fontSize: 16),
+                    ),
                   ),
                 ),
 
@@ -75,10 +109,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     UnitText(text: "Bạn chưa có tài khoản?"),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         context.push(PathRouter.registerScreen);
                       },
-                      child: Container(color:Colors.transparent,child: UnitText(text: " Đăng ký ngay", color: AppColors.colorButtonHome, underline: true))),
+                      child: Container(
+                        color: Colors.transparent,
+                        child: UnitText(text: " Đăng ký ngay", color: AppColors.colorButtonHome, underline: true),
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -86,9 +124,11 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: bottomBarDetail(onTap:(){
-        Navigator.of(context).pop();
-      }),
+      bottomNavigationBar: bottomBarDetail(
+        onTap: () {
+          Navigator.of(context).pop();
+        },
+      ),
     );
   }
 }

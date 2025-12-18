@@ -6,6 +6,7 @@ import 'package:remindbless/presentation/screens/login_screen.dart';
 import 'package:remindbless/presentation/screens/notification_list_screen.dart';
 import 'package:remindbless/presentation/screens/register_screen.dart';
 import 'package:remindbless/presentation/screens/root_screen.dart';
+import 'package:remindbless/presentation/screens/verify_otp_screen.dart';
 
 import 'app_routes.dart';
 
@@ -37,6 +38,17 @@ final GoRouter router = GoRouter(
       pageBuilder: (context, state) {
         return AppNavigator.buildPage(
           child: const RegisterScreen(),
+          state: state,
+          transition: Platform.isAndroid ? AppTransition.material3 : AppTransition.ios,
+        );
+      },
+    ),
+
+    GoRoute(
+      path: PathRouter.verifyOtpScreen,
+      pageBuilder: (context, state) {
+        return AppNavigator.buildPage(
+          child: const VerifyOtpScreen(),
           state: state,
           transition: Platform.isAndroid ? AppTransition.material3 : AppTransition.ios,
         );
