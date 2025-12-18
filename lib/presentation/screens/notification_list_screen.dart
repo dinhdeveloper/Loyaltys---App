@@ -93,7 +93,7 @@ class _NotificationListScreenState extends State<NotificationListScreen> {
                         );
                       }, childCount: day.items.length + 1), // +1 cho header
                     );
-                  }).toList(),
+                  }),
                 ],
               ),
             ),

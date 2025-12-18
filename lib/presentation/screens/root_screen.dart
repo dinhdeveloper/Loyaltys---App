@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:remindbless/core/app_assets.dart';
-import 'package:remindbless/presentation/screens/add_remind_screen.dart';
+import 'package:remindbless/presentation/screens/scan_qrcode_screen.dart';
 import 'package:remindbless/presentation/screens/setting_screen.dart';
 import 'package:remindbless/presentation/widgets/common/unit_text.dart';
 
@@ -23,8 +23,8 @@ class _RootScreenState extends State<RootScreen> {
   Widget build(BuildContext context) {
     final screens = [
       HomeScreen(key: _homeKey),
-      ScanQrCodeScreen(),
       HistoryPointScreen(),
+      ScanQrCodeScreen(),
       SettingScreen(),
     ];
 
@@ -77,8 +77,8 @@ class _RootScreenState extends State<RootScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             _buildNavIcon(Assets.iconHome, 0, "Trang chủ"),
-            _buildNavIcon(Assets.iconScanQR, 1, "Quét mã"),
-            _buildNavIcon(Assets.iconBadge, 2, "Tích điểm"),
+            _buildNavIcon(Assets.iconHistory, 1, "Lịch sử"),
+            _buildNavIcon(Assets.iconScanQR, 2, "Tích điểm"),
             _buildNavIcon(Assets.iconProfile, 3, "Tài khoản"),
           ],
         ),

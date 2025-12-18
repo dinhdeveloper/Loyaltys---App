@@ -1,42 +1,250 @@
 {
   "notifications": [
     {
-      "date": "Thứ 7 ngày 15/12/2025",
+      "date": "Thứ 2 ngày 01/12/2025",
+      "categoryId": "cat1",
       "items": [
         {
+          "id": "1",
           "title": "Đặt hàng thành công",
-          "desc": "Bạn đã đặt đơn hàng mua coffee thành công, đơn hàng của bạn sẽ đến sớm nhất.",
-          "time": "18:40 15/12/2025"
+          "desc": "Bạn đã đặt đơn hàng mua coffee thành công.",
+          "time": "08:15 01/12/2025",
+          "contents": "Chi tiết đơn hàng #1001"
         },
         {
+          "id": "2",
           "title": "Đơn hàng đang giao",
-          "desc": "Đơn hàng của bạn đang được giao, vui lòng chờ.",
-          "time": "19:15 15/12/2025"
+          "desc": "Đơn hàng của bạn đang được giao.",
+          "time": "09:30 01/12/2025",
+          "contents": "Shipper đang di chuyển"
         }
       ]
     },
     {
-      "date": "Thứ 3 ngày 14/12/2025",
+      "date": "Thứ 3 ngày 02/12/2025",
+      "categoryId": "cat2",
       "items": [
         {
+          "id": "3",
           "title": "Nhận voucher thành công",
-          "desc": "Bạn đã nhận voucher giảm giá 50% tại DinhTC Coffee.",
-          "time": "09:20 14/12/2025"
+          "desc": "Bạn đã nhận voucher giảm giá 50%.",
+          "time": "10:20 02/12/2025",
+          "contents": "Voucher áp dụng cho tất cả đồ uống"
         }
       ]
     },
     {
-      "date": "Thứ 2 ngày 13/12/2025",
+      "date": "Thứ 4 ngày 03/12/2025",
+      "categoryId": "cat3",
       "items": [
         {
+          "id": "4",
           "title": "Tích điểm thành công",
-          "desc": "Bạn đã tích thành công 20 điểm tại DinhTC Coffee.",
-          "time": "12:30 13/12/2025"
+          "desc": "Bạn đã tích thành công 10 điểm.",
+          "time": "11:10 03/12/2025",
+          "contents": "Điểm đã cộng vào tài khoản"
         },
         {
+          "id": "5",
           "title": "Tích điểm thành công",
-          "desc": "Bạn đã tích thành công 15 điểm tại DinhTC Coffee.",
-          "time": "15:45 13/12/2025"
+          "desc": "Bạn đã tích thành công 15 điểm.",
+          "time": "12:45 03/12/2025",
+          "contents": "Điểm đã cộng vào tài khoản"
+        }
+      ]
+    },
+    {
+      "date": "Thứ 5 ngày 04/12/2025",
+      "categoryId": "cat4",
+      "items": [
+        {
+          "id": "6",
+          "title": "Đặt hàng thành công",
+          "desc": "Bạn đã đặt đơn hàng thành công.",
+          "time": "08:30 04/12/2025",
+          "contents": "Chi tiết đơn hàng #1002"
+        }
+      ]
+    },
+    {
+      "date": "Thứ 6 ngày 05/12/2025",
+      "categoryId": "cat5",
+      "items": [
+        {
+          "id": "7",
+          "title": "Nhận voucher thành công",
+          "desc": "Bạn đã nhận voucher giảm giá 30%.",
+          "time": "09:50 05/12/2025",
+          "contents": "Voucher áp dụng cho đồ uống nóng"
+        }
+      ]
+    },
+    {
+      "date": "Thứ 7 ngày 06/12/2025",
+      "categoryId": "cat6",
+      "items": [
+        {
+          "id": "8",
+          "title": "Đơn hàng đang giao",
+          "desc": "Đơn hàng của bạn đang được giao.",
+          "time": "14:20 06/12/2025",
+          "contents": "Shipper đang di chuyển"
+        }
+      ]
+    },
+    {
+      "date": "Chủ nhật ngày 07/12/2025",
+      "categoryId": "cat7",
+      "items": [
+        {
+          "id": "9",
+          "title": "Tích điểm thành công",
+          "desc": "Bạn đã tích thành công 5 điểm.",
+          "time": "15:00 07/12/2025",
+          "contents": "Điểm đã cộng vào tài khoản"
+        }
+      ]
+    },
+    {
+      "date": "Thứ 2 ngày 08/12/2025",
+      "categoryId": "cat8",
+      "items": [
+        {
+          "id": "10",
+          "title": "Nhận voucher thành công",
+          "desc": "Bạn đã nhận voucher giảm giá 20%.",
+          "time": "10:10 08/12/2025",
+          "contents": "Voucher áp dụng cho đồ uống lạnh"
+        }
+      ]
+    },
+    {
+      "date": "Thứ 3 ngày 09/12/2025",
+      "categoryId": "cat9",
+      "items": [
+        {
+          "id": "11",
+          "title": "Đặt hàng thành công",
+          "desc": "Bạn đã đặt đơn hàng mua coffee thành công.",
+          "time": "09:15 09/12/2025",
+          "contents": "Chi tiết đơn hàng #1003"
+        }
+      ]
+    },
+    {
+      "date": "Thứ 4 ngày 10/12/2025",
+      "categoryId": "cat10",
+      "items": [
+        {
+          "id": "12",
+          "title": "Tích điểm thành công",
+          "desc": "Bạn đã tích thành công 12 điểm.",
+          "time": "11:30 10/12/2025",
+          "contents": "Điểm đã cộng vào tài khoản"
+        }
+      ]
+    },
+    {
+      "date": "Thứ 5 ngày 11/12/2025",
+      "categoryId": "cat11",
+      "items": [
+        {
+          "id": "13",
+          "title": "Đơn hàng đang giao",
+          "desc": "Đơn hàng của bạn đang được giao.",
+          "time": "14:50 11/12/2025",
+          "contents": "Shipper đang di chuyển"
+        }
+      ]
+    },
+    {
+      "date": "Thứ 6 ngày 12/12/2025",
+      "categoryId": "cat12",
+      "items": [
+        {
+          "id": "14",
+          "title": "Nhận voucher thành công",
+          "desc": "Bạn đã nhận voucher giảm giá 25%.",
+          "time": "10:40 12/12/2025",
+          "contents": "Voucher áp dụng cho đồ uống nóng"
+        }
+      ]
+    },
+    {
+      "date": "Thứ 7 ngày 13/12/2025",
+      "categoryId": "cat13",
+      "items": [
+        {
+          "id": "15",
+          "title": "Đặt hàng thành công",
+          "desc": "Bạn đã đặt đơn hàng mua coffee thành công.",
+          "time": "08:55 13/12/2025",
+          "contents": "Chi tiết đơn hàng #1004"
+        }
+      ]
+    },
+    {
+      "date": "Chủ nhật ngày 14/12/2025",
+      "categoryId": "cat14",
+      "items": [
+        {
+          "id": "16",
+          "title": "Tích điểm thành công",
+          "desc": "Bạn đã tích thành công 18 điểm.",
+          "time": "12:15 14/12/2025",
+          "contents": "Điểm đã cộng vào tài khoản"
+        }
+      ]
+    },
+    {
+      "date": "Thứ 2 ngày 15/12/2025",
+      "categoryId": "cat15",
+      "items": [
+        {
+          "id": "17",
+          "title": "Đơn hàng đang giao",
+          "desc": "Đơn hàng của bạn đang được giao.",
+          "time": "15:35 15/12/2025",
+          "contents": "Shipper đang di chuyển"
+        }
+      ]
+    },
+    {
+      "date": "Thứ 3 ngày 16/12/2025",
+      "categoryId": "cat16",
+      "items": [
+        {
+          "id": "18",
+          "title": "Nhận voucher thành công",
+          "desc": "Bạn đã nhận voucher giảm giá 40%.",
+          "time": "10:50 16/12/2025",
+          "contents": "Voucher áp dụng cho tất cả đồ uống"
+        }
+      ]
+    },
+    {
+      "date": "Thứ 4 ngày 17/12/2025",
+      "categoryId": "cat17",
+      "items": [
+        {
+          "id": "19",
+          "title": "Tích điểm thành công",
+          "desc": "Bạn đã tích thành công 22 điểm.",
+          "time": "13:15 17/12/2025",
+          "contents": "Điểm đã cộng vào tài khoản"
+        }
+      ]
+    },
+    {
+      "date": "Thứ 5 ngày 18/12/2025",
+      "categoryId": "cat18",
+      "items": [
+        {
+          "id": "20",
+          "title": "Đặt hàng thành công",
+          "desc": "Bạn đã đặt đơn hàng mua coffee thành công.",
+          "time": "09:40 18/12/2025",
+          "contents": "Chi tiết đơn hàng"
         }
       ]
     }

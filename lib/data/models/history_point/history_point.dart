@@ -1,11 +1,17 @@
 class HistoryPoint {
+  final String categoryId; // id của ngày/category
   final String date;
   final List<HistoryItem> items;
 
-  HistoryPoint({required this.date, required this.items});
+  HistoryPoint({
+    required this.categoryId,
+    required this.date,
+    required this.items,
+  });
 
   factory HistoryPoint.fromJson(Map<String, dynamic> json) {
     return HistoryPoint(
+      categoryId: json['categoryId'],
       date: json['date'],
       items: (json['items'] as List)
           .map((e) => HistoryItem.fromJson(e))
@@ -15,27 +21,27 @@ class HistoryPoint {
 }
 
 class HistoryItem {
+  final String id; // id riêng của item
   final String title;
   final String desc;
   final String time;
-  final String icon;
-  final int color;
+  final String contents;
 
   HistoryItem({
+    required this.id,
     required this.title,
     required this.desc,
     required this.time,
-    required this.icon,
-    required this.color,
+    required this.contents,
   });
 
   factory HistoryItem.fromJson(Map<String, dynamic> json) {
     return HistoryItem(
+      id: json['id'],
       title: json['title'],
       desc: json['desc'],
       time: json['time'],
-      icon: json['icon'],
-      color: int.parse(json['color']),
+      contents: json['contents'],
     );
   }
 }

@@ -30,8 +30,11 @@ class Assets{
   static const String iconNoti = 'assets/images/icon_noti.svg';
   static const String iconTicket = 'assets/images/icon_ticket.svg';
   static const String iconWallet = 'assets/images/icon_wallet.svg';
-  static const String iconEditProfile = 'assets/images/edit_profile.svg';
+  //static const String iconEditProfile = 'assets/images/edit_profile.svg';
   static const String iconNextAction = 'assets/images/next_action.svg';
+  static const String iconHistory = 'assets/images/icon_history.svg';
+  static const String iconEditProfile = 'assets/images/icon_edit_profile.svg';
+  static const String iconHandPointer = 'assets/images/icon_pointer.svg';
   static const String iconCoffeeMenu = 'assets/images/coffee_menu.png';
   static const String iconCoffeeCup = 'assets/images/coffee_cup.png';
   static const String iconCoffee2 = 'assets/images/cofee_2.png';

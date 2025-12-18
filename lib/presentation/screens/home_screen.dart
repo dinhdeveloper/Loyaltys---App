@@ -17,7 +17,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
-
   late TabController tabController;
   final tabs = ["Dành cho bạn", "Ưu đãi đỉnh"];
 
@@ -39,7 +38,6 @@ class HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMi
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -53,33 +51,23 @@ class HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMi
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             /// ====== TÊN QUÁN ======
             Padding(
               padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  UnitText(
-                    text: "BoomBerry Coffee",
-                    fontSize: 20,
-                    color: Colors.white,
-                    fontFamily: Assets.sfProBlackItalic,
-                  ),
+                  UnitText(text: "BoomBerry Coffee", fontSize: 20, color: Colors.white, fontFamily: Assets.sfProBlackItalic),
 
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       context.push(PathRouter.loginScreen);
                     },
-                    child: Container(color: Colors.transparent,
+                    child: Container(
+                      color: Colors.transparent,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
-                        child: UnitText(
-                          text: "Đăng nhập",
-                          fontSize: 15,
-                          color: Colors.white,
-                          fontFamily: Assets.sfProMedium,
-                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        child: UnitText(text: "Đăng nhập", fontSize: 15, color: Colors.white, fontFamily: Assets.sfProMedium),
                       ),
                     ),
                   ),
@@ -90,10 +78,7 @@ class HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMi
             /// ====== PHẦN BO GÓC ======
             Expanded(
               child: ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(25),
-                  topRight: Radius.circular(25),
-                ),
+                borderRadius: const BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25)),
                 child: Container(
                   color: Colors.white,
                   child: MediaQuery.removePadding(
@@ -122,21 +107,13 @@ class HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMi
                                 viewScrollHorizontalItemSaleWidget(),
 
                                 const SizedBox(height: 15),
-                                UnitText(
-                                  text: "Danh Mục Cho Bạn",
-                                  fontSize: 16,
-                                  fontFamily: Assets.sfProBlackItalic,
-                                ),
+                                UnitText(text: "Danh Mục Cho Bạn", fontSize: 16, fontFamily: Assets.sfProBlackItalic),
                                 const SizedBox(height: 10),
 
                                 viewSquareSaleWidget(),
 
                                 const SizedBox(height: 15),
-                                Container(
-                                  width: width,
-                                  height: 10,
-                                  color: Colors.grey[200],
-                                ),
+                                Container(width: width, height: 10, color: Colors.grey[200]),
                               ],
                             ),
                           ),
@@ -162,10 +139,7 @@ class HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMi
                       body: TabBarView(
                         physics: const NeverScrollableScrollPhysics(),
                         controller: tabController,
-                        children: [
-                          viewPageForYou(),
-                          viewPageForYou(),
-                        ],
+                        children: [viewPageForYou(), viewPageForYou()],
                       ),
                     ),
                   ),

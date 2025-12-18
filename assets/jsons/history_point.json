@@ -1,132 +1,128 @@
 {
   "history": [
     {
+      "categoryId": "c1",
       "date": "Thứ 2 ngày 01/03/2023",
       "items": [
         {
+          "id": "1",
           "title": "Tích 10 điểm thành công",
-          "desc": "Bạn đã tích thành công 10 điểm tại DinhTC Coffee.",
+          "desc": "Bạn đã tích thành công 10 điểm tại BoomBerry Coffee.",
           "time": "09:15 01/03/2023",
-          "icon": "assets/images/notification_3d.png",
-          "color": "0xFF4CAF50"
+          "contents": "Chi tiết về giao dịch tích điểm 10"
         },
         {
+          "id": "2",
           "title": "Tích 11 điểm thành công",
-          "desc": "Bạn đã tích thành công 11 điểm tại DinhTC Coffee.",
+          "desc": "Bạn đã tích thành công 11 điểm tại BoomBerry Coffee.",
           "time": "10:30 01/03/2023",
-          "icon": "assets/images/notification_3d.png",
-          "color": "0xFF4CAF50"
-        },
-        {
-          "title": "Tích 12 điểm thành công",
-          "desc": "Bạn đã tích thành công 12 điểm tại DinhTC Coffee.",
-          "time": "14:45 01/03/2023",
-          "icon": "assets/images/notification_3d.png",
-          "color": "0xFF4CAF50"
+          "contents": "Chi tiết về giao dịch tích điểm 11"
         }
       ]
     },
     {
+      "categoryId": "c2",
       "date": "Thứ 3 ngày 02/03/2023",
       "items": [
         {
-          "title": "Tích 13 điểm thành công",
-          "desc": "Bạn đã tích thành công 13 điểm tại DinhTC Coffee.",
+          "id": "3",
+          "title": "Tích 12 điểm thành công",
+          "desc": "Bạn đã tích thành công 12 điểm tại BoomBerry Coffee.",
           "time": "08:20 02/03/2023",
-          "icon": "assets/images/notification_3d.png",
-          "color": "0xFF4CAF50"
+          "contents": "Chi tiết về giao dịch tích điểm 12"
         },
         {
-          "title": "Tích 14 điểm thành công",
-          "desc": "Bạn đã tích thành công 14 điểm tại DinhTC Coffee.",
+          "id": "4",
+          "title": "Tích 13 điểm thành công",
+          "desc": "Bạn đã tích thành công 13 điểm tại BoomBerry Coffee.",
           "time": "11:40 02/03/2023",
-          "icon": "assets/images/notification_3d.png",
-          "color": "0xFF4CAF50"
+          "contents": "Chi tiết về giao dịch tích điểm 13"
         }
       ]
     },
     {
+      "categoryId": "c3",
       "date": "Thứ 4 ngày 03/03/2023",
       "items": [
         {
-          "title": "Tích 15 điểm thành công",
-          "desc": "Bạn đã tích thành công 15 điểm tại DinhTC Coffee.",
+          "id": "5",
+          "title": "Tích 14 điểm thành công",
+          "desc": "Bạn đã tích thành công 14 điểm tại BoomBerry Coffee.",
           "time": "09:00 03/03/2023",
-          "icon": "assets/images/notification_3d.png",
-          "color": "0xFF4CAF50"
+          "contents": "Chi tiết về giao dịch tích điểm 14"
         },
         {
-          "title": "Tích 16 điểm thành công",
-          "desc": "Bạn đã tích thành công 16 điểm tại DinhTC Coffee.",
+          "id": "6",
+          "title": "Tích 15 điểm thành công",
+          "desc": "Bạn đã tích thành công 15 điểm tại BoomBerry Coffee.",
           "time": "12:30 03/03/2023",
-          "icon": "assets/images/notification_3d.png",
-          "color": "0xFF4CAF50"
+          "contents": "Chi tiết về giao dịch tích điểm 15"
         },
         {
-          "title": "Tích 17 điểm thành công",
-          "desc": "Bạn đã tích thành công 17 điểm tại DinhTC Coffee.",
+          "id": "7",
+          "title": "Tích 16 điểm thành công",
+          "desc": "Bạn đã tích thành công 16 điểm tại BoomBerry Coffee.",
           "time": "15:45 03/03/2023",
-          "icon": "assets/images/notification_3d.png",
-          "color": "0xFF4CAF50"
-        },
-        {
-          "title": "Tích 18 điểm thành công",
-          "desc": "Bạn đã tích thành công 18 điểm tại DinhTC Coffee.",
-          "time": "17:20 03/03/2023",
-          "icon": "assets/images/notification_3d.png",
-          "color": "0xFF4CAF50"
-        },
-        {
-          "title": "Tích 19 điểm thành công",
-          "desc": "Bạn đã tích thành công 19 điểm tại DinhTC Coffee.",
-          "time": "19:10 03/03/2023",
-          "icon": "assets/images/notification_3d.png",
-          "color": "0xFF4CAF50"
+          "contents": "Chi tiết về giao dịch tích điểm 16"
         }
       ]
     },
     {
+      "categoryId": "c4",
       "date": "Thứ 5 ngày 04/03/2023",
       "items": [
         {
-          "title": "Tích 20 điểm thành công",
-          "desc": "Bạn đã tích thành công 20 điểm tại DinhTC Coffee.",
+          "id": "8",
+          "title": "Tích 17 điểm thành công",
+          "desc": "Bạn đã tích thành công 17 điểm tại BoomBerry Coffee.",
           "time": "08:45 04/03/2023",
-          "icon": "assets/images/notification_3d.png",
-          "color": "0xFF4CAF50"
+          "contents": "Chi tiết về giao dịch tích điểm 17"
         },
         {
-          "title": "Tích 21 điểm thành công",
-          "desc": "Bạn đã tích thành công 21 điểm tại DinhTC Coffee.",
+          "id": "9",
+          "title": "Tích 18 điểm thành công",
+          "desc": "Bạn đã tích thành công 18 điểm tại BoomBerry Coffee.",
           "time": "10:50 04/03/2023",
-          "icon": "assets/images/notification_3d.png",
-          "color": "0xFF4CAF50"
+          "contents": "Chi tiết về giao dịch tích điểm 18"
         }
       ]
     },
     {
-      "date": "Thứ 3 ngày 05/03/2023",
+      "categoryId": "c5",
+      "date": "Thứ 6 ngày 05/03/2023",
       "items": [
         {
-          "title": "Tích 22 điểm thành công",
-          "desc": "Bạn đã tích thành công 22 điểm tại DinhTC Coffee.",
+          "id": "10",
+          "title": "Tích 19 điểm thành công",
+          "desc": "Bạn đã tích thành công 19 điểm tại BoomBerry Coffee.",
           "time": "09:20 05/03/2023",
-          "icon": "assets/images/notification_3d.png",
-          "color": "0xFF4CAF50"
-        },
+          "contents": "Chi tiết về giao dịch tích điểm 19"
+        }
+      ]
+    },
+    {
+      "categoryId": "c6",
+      "date": "Thứ 7 ngày 06/03/2023",
+      "items": [
         {
-          "title": "Tích 23 điểm thành công",
-          "desc": "Bạn đã tích thành công 23 điểm tại DinhTC Coffee.",
-          "time": "13:15 05/03/2023",
-          "icon": "assets/images/notification_3d.png",
-          "color": "0xFF4CAF50"
-        },
+          "id": "11",
+          "title": "Tích 20 điểm thành công",
+          "desc": "Bạn đã tích thành công 20 điểm tại BoomBerry Coffee.",
+          "time": "11:00 06/03/2023",
+          "contents": "Chi tiết về giao dịch tích điểm 20"
+        }
+      ]
+    },
+    {
+      "categoryId": "c7",
+      "date": "Chủ nhật ngày 07/03/2023",
+      "items": [
         {
-          "title": "Tích 24 điểm thành công",
-          "desc": "Bạn đã tích thành công 24 điểm tại DinhTC Coffee.",
-          "time": "15:45 05/03/2023",
-          "icon": "assets/images/notification_3d.png",
-          "color": "0xFF4CAF50"
+          "id": "12",
+          "title": "Tích 21 điểm thành công",
+          "desc": "Bạn đã tích thành công 21 điểm tại BoomBerry Coffee.",
+          "time": "09:30 07/03/2023",
+          "contents": "Chi tiết về giao dịch tích điểm 21"
         }
       ]
     }

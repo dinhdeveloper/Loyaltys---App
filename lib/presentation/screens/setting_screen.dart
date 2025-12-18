@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:remindbless/core/app_assets.dart';
 import 'package:remindbless/core/app_theme.dart';
+import 'package:remindbless/presentation/widgets/common/animated_gradient_border_container.dart';
 import 'package:remindbless/presentation/widgets/common/unit_text.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -53,11 +54,39 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
             ),
             const SizedBox(height: 5),
-            Center(child: UnitText(text: "Trần Cảnh Dinh", fontFamily: Assets.sfProMedium, fontSize: 16)),
-            Center(child: UnitText(text: "0975.469.232", fontFamily: Assets.sfProLight, fontSize: 16,color: Colors.black45)),
+            Center(
+              child: UnitText(text: "Trần Cảnh Dinh", fontFamily: Assets.sfProMedium, fontSize: 16),
+            ),
+            Center(
+              child: UnitText(text: "0975.469.232", fontFamily: Assets.sfProLight, fontSize: 16, color: Colors.black45),
+            ),
             const SizedBox(height: 15),
-            Center(child: Container(color: Colors.black12, height: 0.5, width: MediaQuery.of(context).size.width - 40)),
-            const SizedBox(height: 55),
+            Center(
+              child: Container(color: Colors.black12, height: 0.5, width: MediaQuery.of(context).size.width - 40),
+            ),
+            const SizedBox(height: 25),
+
+            AnimatedGradientBorderContainer(
+              width: MediaQuery.of(context).size.width,
+              height: 60,
+              borderRadius: 12,
+              borderWidth: 0.5,
+              gradientColors: [Colors.white, Colors.amber.shade600, Colors.deepOrange],
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      UnitText(text: "Thông tin hội viên", fontFamily: Assets.sfProRegular),
+                      SvgPicture.asset(Assets.iconNextAction, width: 14, height: 14),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 25),
 
             Container(
               width: MediaQuery.of(context).size.width,
@@ -65,13 +94,7 @@ class _SettingScreenState extends State<SettingScreen> {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(8),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 20,
-                    offset: const Offset(0, 1),
-                  ),
-                ],
+                boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 20, offset: const Offset(0, 1))],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,81 +102,79 @@ class _SettingScreenState extends State<SettingScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      UnitText(
-                        text: "Chính sách Bảo Mật Thông Tin", fontFamily: Assets.sfProRegular,
-                      ),
-                      SvgPicture.asset(Assets.iconNextAction,width: 14,height: 14)
+                      UnitText(text: "Chính sách Bảo Mật Thông Tin", fontFamily: Assets.sfProRegular),
+                      SvgPicture.asset(Assets.iconNextAction, width: 14, height: 14),
                     ],
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15),
-                    child: Center(child: Container(color: Colors.black12, height: 0.5, width: MediaQuery.of(context).size.width - 100)),
+                    child: Center(
+                      child: Container(color: Colors.black12, height: 0.5, width: MediaQuery.of(context).size.width - 100),
+                    ),
                   ),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      UnitText(
-                        text: "Chính sách Bảo Mật Dữ Liệu Cá Nhân", fontFamily: Assets.sfProRegular,
-                      ),
-                      SvgPicture.asset(Assets.iconNextAction,width: 14,height: 14)
+                      UnitText(text: "Chính sách Bảo Mật Dữ Liệu Cá Nhân", fontFamily: Assets.sfProRegular),
+                      SvgPicture.asset(Assets.iconNextAction, width: 14, height: 14),
                     ],
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15),
-                    child: Center(child: Container(color: Colors.black12, height: 0.5, width: MediaQuery.of(context).size.width - 100)),
+                    child: Center(
+                      child: Container(color: Colors.black12, height: 0.5, width: MediaQuery.of(context).size.width - 100),
+                    ),
                   ),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      UnitText(
-                        text: "Đơn hàng đã mua", fontFamily: Assets.sfProRegular,
-                      ),
-                      SvgPicture.asset(Assets.iconNextAction,width: 14,height: 14)
+                      UnitText(text: "Đơn hàng đã mua", fontFamily: Assets.sfProRegular),
+                      SvgPicture.asset(Assets.iconNextAction, width: 14, height: 14),
                     ],
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15),
-                    child: Center(child: Container(color: Colors.black12, height: 0.5, width: MediaQuery.of(context).size.width - 100)),
+                    child: Center(
+                      child: Container(color: Colors.black12, height: 0.5, width: MediaQuery.of(context).size.width - 100),
+                    ),
                   ),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      UnitText(
-                        text: "Danh sách yêu thích", fontFamily: Assets.sfProRegular,
-                      ),
-                      SvgPicture.asset(Assets.iconNextAction,width: 14,height: 14)
+                      UnitText(text: "Danh sách yêu thích", fontFamily: Assets.sfProRegular),
+                      SvgPicture.asset(Assets.iconNextAction, width: 14, height: 14),
                     ],
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15),
-                    child: Center(child: Container(color: Colors.black12, height: 0.5, width: MediaQuery.of(context).size.width - 100)),
+                    child: Center(
+                      child: Container(color: Colors.black12, height: 0.5, width: MediaQuery.of(context).size.width - 100),
+                    ),
                   ),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      UnitText(
-                        text: "Hotline: 0975.469.232", fontFamily: Assets.sfProRegular,
-                      ),
-                      SvgPicture.asset(Assets.iconNextAction,width: 14,height: 14)
+                      UnitText(text: "Hotline: 0975.469.232", fontFamily: Assets.sfProRegular),
+                      SvgPicture.asset(Assets.iconNextAction, width: 14, height: 14),
                     ],
                   ),
 
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15),
-                    child: Center(child: Container(color: Colors.black12, height: 0.5, width: MediaQuery.of(context).size.width - 100)),
+                    child: Center(
+                      child: Container(color: Colors.black12, height: 0.5, width: MediaQuery.of(context).size.width - 100),
+                    ),
                   ),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      UnitText(
-                        text: "Đăng xuất", fontFamily: Assets.sfProRegular,
-                      ),
-                      SvgPicture.asset(Assets.iconNextAction,width: 14,height: 14)
+                      UnitText(text: "Đăng xuất", fontFamily: Assets.sfProRegular),
+                      SvgPicture.asset(Assets.iconNextAction, width: 14, height: 14),
                     ],
                   ),
                 ],
