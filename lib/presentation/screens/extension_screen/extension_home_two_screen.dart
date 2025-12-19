@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:remindbless/core/app_assets.dart';
+import 'package:remindbless/core/path_router.dart';
 import 'package:remindbless/data/models/data_home.dart';
+import 'package:remindbless/data/models/products/product_item.dart';
 import 'package:remindbless/presentation/screens/home_screen.dart';
 import 'package:remindbless/presentation/widgets/common/ticket_common.dart';
 import 'package:remindbless/presentation/widgets/common/unit_text.dart';
@@ -59,7 +61,7 @@ extension ExtensionHomeTwoScreen on HomeScreenState{
     );
   }
 
-  Widget viewPageForYou(){
+  Widget viewPageForYou(List<ProductItem>? listProduct){
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 15,horizontal: 15),
       child: GridView.builder(
@@ -72,20 +74,31 @@ extension ExtensionHomeTwoScreen on HomeScreenState{
           crossAxisSpacing: 5,
           childAspectRatio: 110 / 170, // tỷ lệ width/height mỗi item
         ),
-        itemCount: jsonMegaSale['items']?.length ?? 0,
+        itemCount: listProduct?.length ?? 0,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 5),
-            child: CouponCard(
-              height: double.infinity,
-              width: double.infinity,
-              curvePosition: 160,
-              curveRadius: 15,
-              borderRadius: 10,
-              decoration: BoxDecoration(color: Colors.white),
-              firstChild: firstChildPageForYou(jsonMegaSale['items']?[index]),
-              borderColor: Colors.black12,
-              secondChild: secondChildPageForYou(jsonMegaSale['items']?[index]),
+            child: GestureDetector(
+              onTap: (){
+                Navigator.pushNamed(
+                  context,
+                  PathRouter.productDetailScreen,
+                  arguments: {
+                    'product': listProduct?[index],
+                  },
+                );
+              },
+              child: CouponCard(
+                height: double.infinity,
+                width: double.infinity,
+                curvePosition: 160,
+                curveRadius: 15,
+                borderRadius: 10,
+                decoration: BoxDecoration(color: Colors.white),
+                firstChild: firstChildPageForYou(listProduct?[index]),
+                borderColor: Colors.black12,
+                secondChild: secondChildPageForYou(listProduct?[index]),
+              ),
             ),
           );
         },

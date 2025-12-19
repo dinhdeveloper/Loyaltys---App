@@ -1,8 +1,8 @@
 [
   {
     "id": "1",
-    "name": "Cà phê sữa đá",
-    "image": "assets/images/view_coffee_cup.jpg",
+    "name": "Cà phê sữa đá truyền thống",
+    "image": "https://images.unsplash.com/photo-1678016935857-396bfff65aae?w=900&auto=format&fit=crop&q=60",
     "price": "29000",
     "priceSale": "25000",
     "location": "STORE",
@@ -10,8 +10,8 @@
   },
   {
     "id": "2",
-    "name": "Cà phê đen đá",
-    "image": "assets/images/view_coffee_cup.jpg",
+    "name": "Cà phê đen đá đậm vị",
+    "image": "https://images.unsplash.com/photo-1654546518361-eef83e447521?w=900&auto=format&fit=crop&q=60",
     "price": "25000",
     "priceSale": "",
     "location": "STORE",
@@ -19,8 +19,8 @@
   },
   {
     "id": "3",
-    "name": "Bạc xỉu",
-    "image": "assets/images/view_coffee_cup.jpg",
+    "name": "Bạc xỉu Sài Gòn",
+    "image": "https://images.unsplash.com/photo-1765100214310-81fb4c062b25?w=900&auto=format&fit=crop&q=60",
     "price": "32000",
     "priceSale": "29000",
     "location": "STORE",
@@ -28,8 +28,8 @@
   },
   {
     "id": "4",
-    "name": "Latte nóng",
-    "image": "assets/images/view_coffee_cup.jpg",
+    "name": "Latte nóng Ý",
+    "image": "https://images.unsplash.com/photo-1543826173-70651703c5a4?w=900&auto=format&fit=crop&q=60",
     "price": "39000",
     "priceSale": "",
     "location": "STORE",
@@ -37,8 +37,8 @@
   },
   {
     "id": "5",
-    "name": "Cappuccino",
-    "image": "assets/images/view_coffee_cup.jpg",
+    "name": "Cappuccino Ý",
+    "image": "https://images.unsplash.com/photo-1604909052743-94e838986d24?w=900&auto=format&fit=crop&q=60",
     "price": "42000",
     "priceSale": "",
     "location": "STORE",
@@ -47,8 +47,8 @@
 
   {
     "id": "6",
-    "name": "Trà đào cam sả",
-    "image": "assets/images/view_coffee_cup.jpg",
+    "name": "Trà đào cam sả mát lạnh",
+    "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=900&auto=format&fit=crop&q=60",
     "price": "35000",
     "priceSale": "32000",
     "location": "ONLINE",
@@ -57,7 +57,7 @@
   {
     "id": "7",
     "name": "Trà sữa truyền thống",
-    "image": "assets/images/view_coffee_cup.jpg",
+    "image": "https://images.unsplash.com/photo-1685644291576-ea3d97fb0a67?q=80&w=1160&auto=format&fit=crop",
     "price": "30000",
     "priceSale": "",
     "location": "ONLINE",
@@ -65,8 +65,8 @@
   },
   {
     "id": "8",
-    "name": "Trà sữa matcha",
-    "image": "assets/images/view_coffee_cup.jpg",
+    "name": "Trà sữa matcha Nhật",
+    "image": "https://images.unsplash.com/photo-1587080413959-06b859fb107d?q=80&w=1184&auto=format&fit=crop",
     "price": "36000",
     "priceSale": "",
     "location": "ONLINE",
@@ -74,8 +74,8 @@
   },
   {
     "id": "9",
-    "name": "Trà vải",
-    "image": "assets/images/view_coffee_cup.jpg",
+    "name": "Trà vải thanh mát",
+    "image": "https://images.unsplash.com/photo-1765100214310-81fb4c062b25?w=900&auto=format&fit=crop&q=60",
     "price": "34000",
     "priceSale": "",
     "location": "STORE",
@@ -84,8 +84,8 @@
 
   {
     "id": "10",
-    "name": "Sinh tố xoài",
-    "image": "assets/images/view_coffee_cup.jpg",
+    "name": "Sinh tố xoài tươi",
+    "image": "https://images.unsplash.com/photo-1543826173-70651703c5a4?w=900&auto=format&fit=crop&q=60",
     "price": "39000",
     "priceSale": "",
     "location": "STORE",
@@ -93,8 +93,8 @@
   },
   {
     "id": "11",
-    "name": "Sinh tố dâu",
-    "image": "assets/images/view_coffee_cup.jpg",
+    "name": "Sinh tố dâu mát lạnh",
+    "image": "https://images.unsplash.com/photo-1604909052743-94e838986d24?w=900&auto=format&fit=crop&q=60",
     "price": "39000",
     "priceSale": "",
     "location": "STORE",
@@ -102,8 +102,8 @@
   },
   {
     "id": "12",
-    "name": "Đá xay socola",
-    "image": "assets/images/view_coffee_cup.jpg",
+    "name": "Socola đá xay",
+    "image": "https://images.unsplash.com/photo-1678016935857-396bfff65aae?w=900&auto=format&fit=crop&q=60",
     "price": "45000",
     "priceSale": "41000",
     "location": "STORE",
@@ -112,8 +112,8 @@
 
   {
     "id": "13",
-    "name": "Bánh tiramisu",
-    "image": "assets/images/view_coffee_cup.jpg",
+    "name": "Bánh tiramisu Ý",
+    "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=900&auto=format&fit=crop&q=60",
     "price": "45000",
     "priceSale": "",
     "location": "STORE",
@@ -121,8 +121,8 @@
   },
   {
     "id": "14",
-    "name": "Bánh cheesecake",
-    "image": "assets/images/view_coffee_cup.jpg",
+    "name": "Bánh cheesecake phô mai",
+    "image": "https://images.unsplash.com/photo-1685644291576-ea3d97fb0a67?q=80&w=1160&auto=format&fit=crop",
     "price": "48000",
     "priceSale": "",
     "location": "STORE",
@@ -130,18 +130,9 @@
   },
   {
     "id": "15",
-    "name": "Bánh su kem",
-    "image": "assets/images/view_coffee_cup.jpg",
+    "name": "Bánh su kem Pháp",
+    "image": "https://images.unsplash.com/photo-1587080413959-06b859fb107d?q=80&w=1184&auto=format&fit=crop",
     "price": "25000",
-    "priceSale": "",
-    "location": "STORE",
-    "categoryId": "CAKE"
-  },
-  {
-    "id": "16",
-    "name": "Bánh brownie",
-    "image": "assets/images/view_coffee_cup.jpg",
-    "price": "35000",
     "priceSale": "",
     "location": "STORE",
     "categoryId": "CAKE"
@@ -149,27 +140,9 @@
 
   {
     "id": "17",
-    "name": "Kem vani",
-    "image": "assets/images/view_coffee_cup.jpg",
+    "name": "Kem vani mát lạnh",
+    "image": "https://images.unsplash.com/photo-1654546518361-eef83e447521?w=900&auto=format&fit=crop&q=60",
     "price": "20000",
-    "priceSale": "",
-    "location": "STORE",
-    "categoryId": "CREAM"
-  },
-  {
-    "id": "18",
-    "name": "Kem socola",
-    "image": "assets/images/view_coffee_cup.jpg",
-    "price": "22000",
-    "priceSale": "",
-    "location": "STORE",
-    "categoryId": "CREAM"
-  },
-  {
-    "id": "19",
-    "name": "Kem dâu",
-    "image": "assets/images/view_coffee_cup.jpg",
-    "price": "22000",
     "priceSale": "",
     "location": "STORE",
     "categoryId": "CREAM"
@@ -177,27 +150,9 @@
 
   {
     "id": "20",
-    "name": "Khoai tây chiên",
-    "image": "assets/images/view_coffee_cup.jpg",
+    "name": "Khoai tây chiên giòn",
+    "image": "https://images.unsplash.com/photo-1604909052743-94e838986d24?w=900&auto=format&fit=crop&q=60",
     "price": "25000",
-    "priceSale": "",
-    "location": "STORE",
-    "categoryId": "FOOD"
-  },
-  {
-    "id": "21",
-    "name": "Gà viên chiên",
-    "image": "assets/images/view_coffee_cup.jpg",
-    "price": "35000",
-    "priceSale": "",
-    "location": "STORE",
-    "categoryId": "FOOD"
-  },
-  {
-    "id": "22",
-    "name": "Xúc xích nướng",
-    "image": "assets/images/view_coffee_cup.jpg",
-    "price": "30000",
     "priceSale": "",
     "location": "STORE",
     "categoryId": "FOOD"
@@ -205,127 +160,9 @@
 
   {
     "id": "23",
-    "name": "Trân châu đen",
-    "image": "assets/images/view_coffee_cup.jpg",
+    "name": "Trân châu đen topping",
+    "image": "https://images.unsplash.com/photo-1765100214310-81fb4c062b25?w=900&auto=format&fit=crop&q=60",
     "price": "8000",
-    "priceSale": "",
-    "location": "ONLINE",
-    "categoryId": "OTHER"
-  },
-  {
-    "id": "24",
-    "name": "Thạch phô mai",
-    "image": "assets/images/view_coffee_cup.jpg",
-    "price": "10000",
-    "priceSale": "",
-    "location": "ONLINE",
-    "categoryId": "OTHER"
-  },
-  {
-    "id": "25",
-    "name": "Shot espresso",
-    "image": "assets/images/view_coffee_cup.jpg",
-    "price": "12000",
-    "priceSale": "",
-    "location": "STORE",
-    "categoryId": "OTHER"
-  },
-
-  {
-    "id": "26",
-    "name": "Cà phê muối",
-    "image": "assets/images/view_coffee_cup.jpg",
-    "price": "38000",
-    "priceSale": "",
-    "location": "STORE",
-    "categoryId": "COFFEE"
-  },
-  {
-    "id": "27",
-    "name": "Cold brew",
-    "image": "assets/images/view_coffee_cup.jpg",
-    "price": "45000",
-    "priceSale": "",
-    "location": "STORE",
-    "categoryId": "COFFEE"
-  },
-  {
-    "id": "28",
-    "name": "Matcha đá xay",
-    "image": "assets/images/view_coffee_cup.jpg",
-    "price": "47000",
-    "priceSale": "43000",
-    "location": "STORE",
-    "categoryId": "FLOAT"
-  },
-  {
-    "id": "29",
-    "name": "Trà chanh",
-    "image": "assets/images/view_coffee_cup.jpg",
-    "price": "25000",
-    "priceSale": "",
-    "location": "ONLINE",
-    "categoryId": "MILKTEA"
-  },
-  {
-    "id": "30",
-    "name": "Bánh mì bơ tỏi",
-    "image": "assets/images/view_coffee_cup.jpg",
-    "price": "28000",
-    "priceSale": "",
-    "location": "STORE",
-    "categoryId": "FOOD"
-  },
-  {
-    "id": "31",
-    "name": "Bánh croissant",
-    "image": "assets/images/view_coffee_cup.jpg",
-    "price": "32000",
-    "priceSale": "",
-    "location": "STORE",
-    "categoryId": "CAKE"
-  },
-  {
-    "id": "32",
-    "name": "Kem matcha",
-    "image": "assets/images/view_coffee_cup.jpg",
-    "price": "25000",
-    "priceSale": "",
-    "location": "STORE",
-    "categoryId": "CREAM"
-  },
-  {
-    "id": "33",
-    "name": "Trà hoa quả nhiệt đới",
-    "image": "assets/images/view_coffee_cup.jpg",
-    "price": "37000",
-    "priceSale": "",
-    "location": "ONLINE",
-    "categoryId": "MILKTEA"
-  },
-  {
-    "id": "34",
-    "name": "Đá xay cookie",
-    "image": "assets/images/view_coffee_cup.jpg",
-    "price": "46000",
-    "priceSale": "",
-    "location": "STORE",
-    "categoryId": "FLOAT"
-  },
-  {
-    "id": "35",
-    "name": "Bánh muffin socola",
-    "image": "assets/images/view_coffee_cup.jpg",
-    "price": "30000",
-    "priceSale": "",
-    "location": "STORE",
-    "categoryId": "CAKE"
-  },
-  {
-    "id": "36",
-    "name": "Syrup caramel",
-    "image": "assets/images/view_coffee_cup.jpg",
-    "price": "15000",
     "priceSale": "",
     "location": "ONLINE",
     "categoryId": "OTHER"

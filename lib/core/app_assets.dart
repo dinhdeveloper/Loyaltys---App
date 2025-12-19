@@ -28,6 +28,8 @@ class Assets{
   static const String iconBackAppbar = 'assets/images/icon_back2.svg';
   static const String iconBrowser = 'assets/images/icon_browers.svg';
   static const String iconEmptyData = 'assets/images/icon_empty_data.svg';
+  static const String iconPlus = 'assets/images/icon_plus.svg';
+  static const String iconMinus = 'assets/images/icon_minus.svg';
 
   static const String imgHamburger = 'assets/images/hamburger.png';
   static const String imgBuritto = 'assets/images/imgBuritto.png';
@@ -57,6 +59,7 @@ class Assets{
   static const String iconSoftDrinks3d = 'assets/images/soft_drinks_3d.png';
   static const String iconReceptionBell = 'assets/images/reception_bell.png';
   static const String imgQrCode = 'assets/images/imgQrCode.png';
+  static const String imgIconApp= 'assets/images/ic_launcher2.png';
 
 
   static const String imgViewCoffeeCup = 'assets/images/view_coffee_cup.jpg';

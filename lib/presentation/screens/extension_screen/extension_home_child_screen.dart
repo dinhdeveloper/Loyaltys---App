@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mobkit_dashed_border/mobkit_dashed_border.dart';
 import 'package:remindbless/core/app_assets.dart';
+import 'package:remindbless/core/path_router.dart';
 import 'package:remindbless/data/models/data_home.dart';
+import 'package:remindbless/data/models/products/product_item.dart';
 import 'package:remindbless/presentation/screens/home_screen.dart';
 import 'package:remindbless/presentation/utils/formatters.dart';
+import 'package:remindbless/presentation/widgets/common/app_image.dart';
 import 'package:remindbless/presentation/widgets/common/best_seller_progress_bar.dart';
 import 'package:remindbless/presentation/widgets/common/torn_paper.dart';
 import 'package:remindbless/presentation/widgets/common/unit_text.dart';
@@ -23,7 +26,7 @@ extension ExHomeChild on HomeScreenState {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            UnitText(text: "Mega Sale Thứ 4\nKhao Lớn", fontSize: 18, fontFamily: Assets.sfProBlackItalic),
+            UnitText(text: "Giảm giá hôm nay\nKhao Lớn", fontSize: 18, fontFamily: Assets.sfProBlackItalic),
             Image.asset(Assets.imgMegaSale),
           ],
         ),
@@ -31,25 +34,36 @@ extension ExHomeChild on HomeScreenState {
     );
   }
 
-  Widget viewScrollHorizontalItemSaleWidget() {
+  Widget viewScrollHorizontalItemSaleWidget(List<ProductItem>? listProduct) {
     return SizedBox(
-      height: 235,
+      height: 240,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: jsonMegaSale['items']?.length ?? 0,
+        itemCount: listProduct?.length ?? 0,
         itemBuilder: (context, index) {
           return Padding(
-            padding: EdgeInsets.only(top: 10, bottom: 10, right: 10, left: (index == 0) ? 20 : 0),
-            child: CouponCard(
-              height: double.infinity,
-              width: 120,
-              curvePosition: 110,
-              curveRadius: 15,
-              borderRadius: 10,
-              decoration: BoxDecoration(color: Colors.white),
-              firstChild: firstChildMegaSale(jsonMegaSale['items']?[index]),
-              borderColor: Colors.black12,
-              secondChild: secondChildMegaSale(jsonMegaSale['items']?[index]),
+            padding: EdgeInsets.only(top: 10, bottom: 10, right: 10, left: index == 0 ? 20 : 0),
+            child: GestureDetector(
+              onTap: (){
+                Navigator.pushNamed(
+                  context,
+                  PathRouter.productDetailScreen,
+                  arguments: {
+                    'product': listProduct?[index],
+                  },
+                );
+              },
+              child: CouponCard(
+                height: double.infinity,
+                width: 120,
+                curvePosition: 120,
+                curveRadius: 15,
+                borderRadius: 10,
+                decoration: const BoxDecoration(color: Colors.white),
+                firstChild: firstChildMegaSale(listProduct?[index]),
+                secondChild: secondChildMegaSale(listProduct?[index]),
+                borderColor: Colors.black12,
+              ),
             ),
           );
         },
@@ -57,39 +71,18 @@ extension ExHomeChild on HomeScreenState {
     );
   }
 
-  Widget secondChildMegaSale(Map<String, Object>? itemSale) {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      width: double.maxFinite,
-      decoration: const BoxDecoration(
-        border: DashedBorder(dashLength: 2, top: BorderSide(color: Colors.grey, width: 0.5)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-        UnitText(text: itemSale?['title'].toString() ?? "Đồ ăn healthy buổi trưa",fontFamily: Assets.sfProMedium, fontWeight: FontWeight.w700, fontSize: 14, maxLines: 2),
-        const Spacer(),
-        Row(children: [
-          UnitText(text: itemSale?['discount'].toString() ?? "-50%",fontFamily: Assets.sfProMedium, fontSize: 12,color: Colors.green[500]),
-          const SizedBox(width: 5),
-          UnitText(text: formatVND(int.parse(itemSale?['oldPrice'].toString() ?? "0")),fontFamily: Assets.sfProMedium, fontSize: 12, lineThrough: true, color: Colors.grey, lineThroughColor:Colors.grey ),
-        ]),
-            UnitText(text: "${formatVND(int.parse(itemSale?['price'].toString() ?? "0"))} VNĐ",fontFamily: Assets.sfProMedium, fontWeight: FontWeight.w700, fontSize: 14, maxLines: 1),
-      ]),
-    );
-  }
-
-  Widget firstChildMegaSale(Map<String, Object>? itemSale) {
+  Widget firstChildMegaSale(ProductItem? product) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(8.0),
-            child: Image.asset(itemSale?['imageUrl'].toString() ?? Assets.iconCoffeeCup, fit: BoxFit.cover, height: 90, width: 90),
+            borderRadius: BorderRadius.circular(8),
+            child: AppImage(
+              imageUrl: product?.image ?? '', height: 100, width: 110,
+            ),
           ),
-
           Padding(
             padding: const EdgeInsets.only(top: 5, left: 2, right: 2),
             child: BestSellerProgressBar(progress: 0.82, soldCount: 120, fillColor: Colors.lightGreenAccent, iconColor: Colors.red),
@@ -99,7 +92,51 @@ extension ExHomeChild on HomeScreenState {
     );
   }
 
-  Widget firstChildPageForYou(Map<String, Object>? itemSale) {
+  Widget secondChildMegaSale(ProductItem? product) {
+    return Container(
+      padding: const EdgeInsets.all(6),
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        border: DashedBorder(dashLength: 2, top: BorderSide(color: Colors.grey, width: 0.5)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          UnitText(
+            text: "${product?.name}",
+            fontFamily: Assets.sfProMedium,
+            fontWeight: FontWeight.w700,
+            fontSize: 14,
+            maxLines: 2,
+          ),
+          const Spacer(),
+          Row(
+            children: [
+              UnitText(text: "-50%", fontFamily: Assets.sfProMedium, fontSize: 12, color: Colors.green[500]),
+              const SizedBox(width: 5),
+              UnitText(
+                text: product?.priceSale.isNotEmpty == true  ? "${formatVND(int.parse("${product?.priceSale}"))} VNĐ" : "",
+                fontFamily: Assets.sfProMedium,
+                fontSize: 12,
+                lineThrough: true,
+                color: Colors.grey,
+                lineThroughColor: Colors.grey,
+              ),
+            ],
+          ),
+          UnitText(
+            text: product?.price.isNotEmpty == true ? "${formatVND(int.parse("${product?.price}"))} VNĐ" : "",
+            fontFamily: Assets.sfProMedium,
+            fontWeight: FontWeight.w700,
+            fontSize: 14,
+            maxLines: 1,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget firstChildPageForYou(ProductItem? itemSale) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
       child: Column(
@@ -107,7 +144,7 @@ extension ExHomeChild on HomeScreenState {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(8.0),
-            child: Image.asset(itemSale?['imageUrl'].toString() ?? Assets.iconCoffeeCup, fit: BoxFit.cover, height: 130, width: double.infinity),
+            child: AppImage(imageUrl: itemSale?.image.toString(),height: 130, width: double.infinity),
           ),
 
           Padding(
@@ -119,7 +156,7 @@ extension ExHomeChild on HomeScreenState {
     );
   }
 
-  Widget secondChildPageForYou(Map<String, Object>? itemSale) {
+  Widget secondChildPageForYou(ProductItem? itemSale) {
     return Container(
       padding: const EdgeInsets.all(8),
       width: double.maxFinite,
@@ -127,17 +164,31 @@ extension ExHomeChild on HomeScreenState {
         border: DashedBorder(dashLength: 2, top: BorderSide(color: Colors.grey, width: 0.5)),
       ),
       child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            UnitText(text: itemSale?['title'].toString() ?? "Đồ ăn healthy buổi trưa",fontFamily: Assets.sfProMedium, fontWeight: FontWeight.w700),
-            const Spacer(),
-            Row(children: [
-              UnitText(text: itemSale?['discount'].toString() ?? "-50%",fontFamily: Assets.sfProMedium, fontSize: 13,color: Colors.green[500]),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          UnitText(text: itemSale?.name.toString() ?? "Đồ ăn healthy buổi trưa", fontFamily: Assets.sfProMedium, fontWeight: FontWeight.w700),
+          const Spacer(),
+          Row(
+            children: [
+              UnitText(text: "-50%", fontFamily: Assets.sfProMedium, fontSize: 13, color: Colors.green[500]),
               const SizedBox(width: 5),
-              UnitText(text: formatVND(int.parse(itemSale?['oldPrice'].toString() ?? "0")),fontFamily: Assets.sfProMedium, fontSize: 13, lineThrough: true, color: Colors.grey, lineThroughColor:Colors.grey ),
-            ]),
-            UnitText(text: "${formatVND(int.parse(itemSale?['price'].toString() ?? "0"))} VNĐ",fontFamily: Assets.sfProMedium, fontWeight: FontWeight.w700),
-          ]),
+              UnitText(
+                text: itemSale?.priceSale.isNotEmpty == true  ? "${formatVND(int.parse("${itemSale?.priceSale}"))} VNĐ" : "",
+                fontFamily: Assets.sfProMedium,
+                fontSize: 13,
+                lineThrough: true,
+                color: Colors.grey,
+                lineThroughColor: Colors.grey,
+              ),
+            ],
+          ),
+          UnitText(
+            text: itemSale?.price.isNotEmpty == true ? "${formatVND(int.parse("${itemSale?.price}"))} VNĐ" : "",
+            fontFamily: Assets.sfProMedium,
+            fontWeight: FontWeight.w700,
+          ),
+        ],
+      ),
     );
   }
 }

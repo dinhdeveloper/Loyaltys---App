@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobkit_dashed_border/mobkit_dashed_border.dart';
 import 'package:remindbless/core/app_assets.dart';
 import 'package:remindbless/core/app_theme.dart';
 import 'package:remindbless/data/models/data_home.dart';
+import 'package:remindbless/data/models/products/product_item.dart';
 import 'package:remindbless/presentation/utils/formatters.dart';
+import 'package:remindbless/presentation/widgets/common/app_image.dart';
+import 'package:remindbless/presentation/widgets/common/app_loading.dart';
 import 'package:remindbless/presentation/widgets/common/best_seller_progress_bar.dart';
 import 'package:remindbless/presentation/widgets/common/ticket_common.dart';
 import 'package:remindbless/presentation/widgets/common/unit_text.dart';
@@ -16,6 +20,42 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
+
+  ProductItem? product;
+  List<ProductItem> listProduct = [];
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _initLoad();
+    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    product = args?['product'];
+    _loadProducts();
+  }
+
+  Future<void> _loadProducts() async {
+    await Future.delayed(const Duration(seconds: 1));
+    listProduct = await ProductRepository.loadProducts();
+  }
+
+  Future<void> _initLoad() async {
+    AppLoading.show();
+    try {
+      await Future.delayed(const Duration(seconds: 3));
+      await _loadProducts();
+    } finally {
+      AppLoading.dismiss();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,10 +66,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           /// ====== IMAGE PRODUCT ======
           Stack(
             children: [
-              Image.asset(Assets.imgViewCoffeeCup, height: 300, width: double.infinity, fit: BoxFit.cover),
+              AppImage(imageUrl: product?.image ?? "", height: 300, width: double.infinity),
 
               /// ===== BACK BUTTON =====
-              Positioned(
+              Positioned (
                 top: 0,
                 left: 0,
                 child: SafeArea(
@@ -103,8 +143,35 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: UnitText(fontSize: 15,fontFamily: Assets.sfProLight,color: Colors.black87,
-                              text: "Ta tìm gì trong một tách cà phê: một chút tỉnh táo, một chút lãng du nghênh ngang ngồi lại bất động giữa phố thị cứ vồn vã trôi đi, tìm giây phút lặng yên cạnh ai đó, cái thở dài trước ngày cứ trôi qua hay một nỗi nhớ ngọt đắng vơi đầy."),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Padding(padding: const EdgeInsets.all(5.0), child: SvgPicture.asset(Assets.iconMinus, width: 28, height: 28)),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                                    child: UnitText(text: "1", fontSize: 16, fontFamily: Assets.sfProMedium),
+                                  ),
+                                  Padding(padding: const EdgeInsets.all(5.0), child: SvgPicture.asset(Assets.iconPlus, width: 28, height: 28)),
+                                ],
+                              ),
+
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 14.0, top: 10),
+                                child: Container(width: double.infinity, height: 0.5, color: Colors.grey.shade300),
+                              ),
+
+                              UnitText(
+                                fontSize: 15,
+                                fontFamily: Assets.sfProLight,
+                                color: Colors.black87,
+                                text:
+                                    "Ta tìm gì trong một tách cà phê: một chút tỉnh táo, một chút lãng du nghênh ngang ngồi lại bất động giữa phố thị cứ vồn vã trôi đi, tìm giây phút lặng yên cạnh ai đó, cái thở dài trước ngày cứ trôi qua hay một nỗi nhớ ngọt đắng vơi đầy.",
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -146,7 +213,7 @@ extension WidgetDetail on _ProductDetailScreenState {
       height: 235,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: jsonMegaSale['items']?.length ?? 0,
+        itemCount: listProduct.length ?? 0,
         itemBuilder: (context, index) {
           return Padding(
             padding: EdgeInsets.only(top: 10, bottom: 10, right: 10, left: (index == 0) ? 20 : 0),
@@ -157,9 +224,9 @@ extension WidgetDetail on _ProductDetailScreenState {
               curveRadius: 15,
               borderRadius: 10,
               decoration: BoxDecoration(color: Colors.white),
-              firstChild: firstChildMegaSale(jsonMegaSale['items']?[index]),
+              firstChild: firstChildMegaSale(listProduct[index]),
               borderColor: Colors.black12,
-              secondChild: secondChildMegaSale(jsonMegaSale['items']?[index]),
+              secondChild: secondChildMegaSale(listProduct[index]),
             ),
           );
         },
@@ -167,7 +234,7 @@ extension WidgetDetail on _ProductDetailScreenState {
     );
   }
 
-  Widget secondChildMegaSale(Map<String, Object>? itemSale) {
+  Widget secondChildMegaSale(ProductItem? itemSale) {
     return Container(
       padding: const EdgeInsets.all(8),
       width: double.maxFinite,
@@ -178,40 +245,33 @@ extension WidgetDetail on _ProductDetailScreenState {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           UnitText(
-            text: itemSale?['title'].toString() ?? "Đồ ăn healthy buổi trưa",
+            text: itemSale?.name.toString() ?? "Đồ ăn healthy buổi trưa",
             fontFamily: Assets.sfProMedium,
-            fontWeight: FontWeight.w700,
-            fontSize: 14,
-            maxLines: 2,
+            fontWeight: FontWeight.w700, fontSize: 14, maxLines: 2,
           ),
           const Spacer(),
           Row(
             children: [
-              UnitText(text: itemSale?['discount'].toString() ?? "-50%", fontFamily: Assets.sfProMedium, fontSize: 12, color: Colors.green[500]),
+              UnitText(text: "-50%", fontFamily: Assets.sfProMedium, fontSize: 12, color: Colors.green[500]),
               const SizedBox(width: 5),
               UnitText(
-                text: formatVND(int.parse(itemSale?['oldPrice'].toString() ?? "0")),
-                fontFamily: Assets.sfProMedium,
-                fontSize: 12,
-                lineThrough: true,
-                color: Colors.grey,
-                lineThroughColor: Colors.grey,
+                text: product?.priceSale.isNotEmpty == true  ? formatVND(int.parse("${product?.priceSale}")) : "",
+                fontFamily: Assets.sfProMedium, fontSize: 12,
+                lineThrough: true, color: Colors.grey, lineThroughColor: Colors.grey,
               ),
             ],
           ),
           UnitText(
-            text: "${formatVND(int.parse(itemSale?['price'].toString() ?? "0"))} VNĐ",
+            text: product?.price.isNotEmpty == true ? "${formatVND(int.parse("${product?.price}"))} VNĐ" : "",
             fontFamily: Assets.sfProMedium,
-            fontWeight: FontWeight.w700,
-            fontSize: 14,
-            maxLines: 1,
+            fontWeight: FontWeight.w700, fontSize: 14, maxLines: 1,
           ),
         ],
       ),
     );
   }
 
-  Widget firstChildMegaSale(Map<String, Object>? itemSale) {
+  Widget firstChildMegaSale(ProductItem? itemSale) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
       child: Column(
@@ -219,7 +279,7 @@ extension WidgetDetail on _ProductDetailScreenState {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(8.0),
-            child: Image.asset(itemSale?['imageUrl'].toString() ?? Assets.iconCoffeeCup, fit: BoxFit.cover, height: 90, width: 90),
+            child: AppImage(imageUrl: itemSale?.image.toString() ?? Assets.iconCoffeeCup, height: 90, width: 110),
           ),
 
           Padding(
@@ -238,14 +298,12 @@ extension WidgetDetail on _ProductDetailScreenState {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          UnitText(text: "Cà phê sữa đá, Cà phê sữa đá, Cà phê sữa đá", fontSize: 19, fontFamily: Assets.sfProRegular, maxLines: 2),
+          UnitText(text: "Cà phê sữa đá, Cà phê sữa đá, Cà phê sữa đá", fontSize: 18, fontFamily: Assets.sfProRegular, maxLines: 2),
           const SizedBox(height: 3),
           UnitText(
             text: "160,000 VNĐ",
-            fontFamily: Assets.sfProMedium,
-            fontSize: 16,
-            lineThrough: true,
-            color: AppColors.colorButtonHome,
+            fontFamily: Assets.sfProMedium, fontSize: 16,
+            lineThrough: true, color: AppColors.colorButtonHome,
             lineThroughColor: AppColors.colorButtonHome,
           ),
         ],

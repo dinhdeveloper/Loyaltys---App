@@ -7,6 +7,7 @@ import 'package:remindbless/core/path_router.dart' show PathRouter;
 import 'package:remindbless/data/models/data_home.dart';
 import 'package:remindbless/data/models/products/product_item.dart';
 import 'package:remindbless/presentation/utils/formatters.dart';
+import 'package:remindbless/presentation/widgets/common/app_image.dart';
 import 'package:remindbless/presentation/widgets/common/bottom_bar_widget.dart';
 import 'package:remindbless/presentation/widgets/common/ticket_common.dart';
 import 'package:remindbless/presentation/widgets/common/unit_text.dart';
@@ -218,14 +219,14 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
       padding: const EdgeInsets.all(5),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
-        child: Image.asset(product.image, height: 140, width: double.infinity, fit: BoxFit.cover),
+        child: AppImage(imageUrl: product.image, height: 140, width: double.infinity),
       ),
     );
   }
 
   Widget _productInfo(ProductItem product) {
     return Container(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(5),
       width: double.maxFinite,
       decoration: const BoxDecoration(
         border: DashedBorder(dashLength: 2, top: BorderSide(color: Colors.grey, width: 0.5)),
