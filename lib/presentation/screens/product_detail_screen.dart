@@ -24,17 +24,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   List<ProductItem> listProduct = [];
 
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _initLoad();
-    });
-  }
-
-  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
+    _initLoad();
     final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
     product = args?['product'];
     _loadProducts();
@@ -43,12 +35,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   Future<void> _loadProducts() async {
     await Future.delayed(const Duration(seconds: 1));
     listProduct = await ProductRepository.loadProducts();
+    setState(() {});
   }
 
   Future<void> _initLoad() async {
     AppLoading.show();
     try {
-      await Future.delayed(const Duration(seconds: 3));
+      await Future.delayed(const Duration(milliseconds: 500));
       await _loadProducts();
     } finally {
       AppLoading.dismiss();

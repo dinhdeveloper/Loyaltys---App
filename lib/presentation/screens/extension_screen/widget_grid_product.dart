@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:remindbless/core/app_assets.dart';
+import 'package:remindbless/core/path_router.dart';
 import 'package:remindbless/data/models/products/product_item.dart';
 import 'package:remindbless/presentation/screens/home_screen.dart';
 import 'package:remindbless/presentation/utils/formatters.dart';
@@ -18,7 +19,17 @@ extension ExGridViewProduct on HomeScreenState {
       crossAxisSpacing: 12,
       itemCount: listProduct?.length ?? 0,
       itemBuilder: (context, index) {
-        return GridItem(index: index, product: listProduct?[index]);
+        return GestureDetector(
+            onTap: (){
+              Navigator.pushNamed(
+                context,
+                PathRouter.productDetailScreen,
+                arguments: {
+                  'product': listProduct?[index],
+                },
+              );
+            },
+            child: GridItem(index: index, product: listProduct?[index]));
       },
     );
   }

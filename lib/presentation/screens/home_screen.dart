@@ -19,12 +19,18 @@ class HomeScreen extends StatefulWidget {
 class HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
   List<ProductItem> listProduct = [];
 
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   WidgetsBinding.instance.addPostFrameCallback((_) {
+  //     _initLoad();
+  //   });
+  // }
+
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _initLoad();
-    });
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _initLoad();
   }
 
   Future<void> _initLoad() async {

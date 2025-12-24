@@ -19,9 +19,9 @@ extension ExHomeScreen on HomeScreenState{
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              UnitText(text: "TP. Hồ Chí Minh", fontSize: 16, fontWeight: FontWeight.w500),
-              const SizedBox(width: 5),
-              SvgPicture.asset(Assets.iconDown),
+              UnitText(text: "Chào Buổi Sáng", fontSize: 16, fontWeight: FontWeight.w500),
+              const SizedBox(width: 4),
+              UnitText(text: "DinhTC", fontSize: 16, fontWeight: FontWeight.w900),
             ],
           ),
           Row(children: [
