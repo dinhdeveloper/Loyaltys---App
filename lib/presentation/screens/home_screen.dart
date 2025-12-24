@@ -18,14 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
   List<ProductItem> listProduct = [];
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   WidgetsBinding.instance.addPostFrameCallback((_) {
-  //     _initLoad();
-  //   });
-  // }
+  List<StoryItem> listStory = [];
 
   @override
   void didChangeDependencies() {
@@ -45,6 +38,7 @@ class HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMi
 
   Future<void> _loadProducts() async {
     listProduct = await ProductRepository.loadProducts();
+    listStory = await ProductRepository.loadStory();
     if (!mounted) return;
     setState(() {});
   }
@@ -121,10 +115,18 @@ class HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMi
                           padding: const EdgeInsets.only(top: 10,bottom: 15),
                           child: Container(width: width, height: 10, color: Colors.grey[200]),
                         ),
+
+                        viewMasonryGrid(listStory),
+
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10,bottom: 15),
+                          child: Container(width: width, height: 10, color: Colors.grey[200]),
+                        ),
+
                         UnitText(text: "Danh Mục Cho Bạn", fontSize: 16, fontFamily: Assets.sfProBlackItalic),
                         const SizedBox(height: 15),
 
-                        viewMasonryGrid(listProduct),
+                        viewOtherGrid(listProduct),
                         const SizedBox(height: 80),
                       ],
                     ),

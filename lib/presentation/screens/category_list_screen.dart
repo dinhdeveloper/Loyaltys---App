@@ -167,7 +167,7 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
         crossAxisCount: 2,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
-        childAspectRatio: 120 / 170,
+        childAspectRatio: 120 / 160,
       ),
       itemBuilder: (context, index) {
         final product = filteredProducts[index];
@@ -225,6 +225,7 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
   }
 
   Widget _productInfo(ProductItem product) {
+    final salePercent = product.salePercent;
     return Container(
       padding: const EdgeInsets.all(5),
       width: double.maxFinite,
@@ -233,16 +234,16 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          UnitText(text: product.name, fontFamily: Assets.sfProLight, fontWeight: FontWeight.w500, fontSize: 15, maxLines: 2),
-          const Spacer(),
-          if (product.priceSale.isNotEmpty)
+          UnitText(text: product.name, fontFamily: Assets.sfProLight, fontWeight: FontWeight.w500, fontSize: 15, maxLines: 1, overflow: TextOverflow.ellipsis),
+          if (product.priceSale.isNotEmpty && salePercent > 0)
             Row(
               children: [
-                UnitText(text: "-50%", fontFamily: Assets.sfProMedium, fontSize: 12, color: Colors.green[500]),
+                UnitText(text: "-$salePercent%", fontFamily: Assets.sfProMedium, fontSize: 12, color: Colors.green[500]),
                 const SizedBox(width: 5),
                 UnitText(
-                  text: formatVND(int.parse(product.priceSale)),
+                  text: product.price.isNotEmpty == true  ? formatVND(int.parse(product.price)) : "",
                   fontFamily: Assets.sfProMedium,
                   fontSize: 12,
                   lineThrough: true,
@@ -250,8 +251,10 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
                   lineThroughColor: Colors.grey,
                 ),
               ],
-            ),
-          UnitText(text: "${formatVND(int.parse(product.price))} VNĐ", fontFamily: Assets.sfProMedium, fontWeight: FontWeight.w700, fontSize: 16),
+            )
+          else
+            const SizedBox(height: 5),
+          UnitText(text: product.priceSale.isNotEmpty == true ? "${formatVND(int.parse(product.priceSale))} VNĐ" : "", fontFamily: Assets.sfProMedium, fontWeight: FontWeight.w700, fontSize: 16),
         ],
       ),
     );

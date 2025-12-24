@@ -22,6 +22,7 @@ class Assets{
   static const String iconWallet = 'assets/images/icon_wallet.svg';
   static const String iconNextAction = 'assets/images/next_action.svg';
   static const String iconHistory = 'assets/images/icon_history.svg';
+  static const String iconCart = 'assets/images/icon_cart_shopping.svg';
   static const String iconEditProfile = 'assets/images/icon_edit_profile.svg';
   static const String iconHandPointer = 'assets/images/icon_pointer.svg';
   static const String iconCloseBack = 'assets/images/icon_close_back.svg';
@@ -30,6 +31,7 @@ class Assets{
   static const String iconEmptyData = 'assets/images/icon_empty_data.svg';
   static const String iconPlus = 'assets/images/icon_plus.svg';
   static const String iconMinus = 'assets/images/icon_minus.svg';
+  static const String iconNextTop = 'assets/images/next_top.svg';
 
   static const String imgHamburger = 'assets/images/hamburger.png';
   static const String imgBuritto = 'assets/images/imgBuritto.png';
@@ -79,4 +81,5 @@ class DataAssets {
   static const String jsonHistoryPoint = 'assets/jsons/history_point.json';
   static const String jsonNotificationList = 'assets/jsons/notification_list.json';
   static const String jsonProducts = 'assets/jsons/products_list.json';
+  static const String jsonStory = 'assets/jsons/json_story.json';
 }

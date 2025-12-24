@@ -4,3 +4,7 @@ String formatVND(num amount) {
         (match) => ',',
   );
 }
+
+double getSoldRatio(int? soldCount, {int max = 2000}) {
+  return ((soldCount ?? max).toDouble() / max).clamp(0.0, 1.0);
+}

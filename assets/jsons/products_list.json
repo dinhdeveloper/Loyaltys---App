@@ -5,6 +5,8 @@
     "image": "https://images.unsplash.com/photo-1678016935857-396bfff65aae?w=900&auto=format&fit=crop&q=60",
     "price": "29000",
     "priceSale": "25000",
+    "salePercent": 14,
+    "soldCount": 1240,
     "location": "STORE",
     "categoryId": "COFFEE"
   },
@@ -13,7 +15,9 @@
     "name": "Cà phê đen đá đậm vị",
     "image": "https://images.unsplash.com/photo-1654546518361-eef83e447521?w=900&auto=format&fit=crop&q=60",
     "price": "25000",
-    "priceSale": "",
+    "priceSale": "25000",
+    "salePercent": 0,
+    "soldCount": 980,
     "location": "STORE",
     "categoryId": "COFFEE"
   },
@@ -23,6 +27,8 @@
     "image": "https://images.unsplash.com/photo-1765100214310-81fb4c062b25?w=900&auto=format&fit=crop&q=60",
     "price": "32000",
     "priceSale": "29000",
+    "salePercent": 9,
+    "soldCount": 860,
     "location": "STORE",
     "categoryId": "COFFEE"
   },
@@ -31,7 +37,9 @@
     "name": "Latte nóng Ý",
     "image": "https://images.unsplash.com/photo-1543826173-70651703c5a4?w=900&auto=format&fit=crop&q=60",
     "price": "39000",
-    "priceSale": "",
+    "priceSale": "39000",
+    "salePercent": 0,
+    "soldCount": 540,
     "location": "STORE",
     "categoryId": "COFFEE"
   },
@@ -40,17 +48,20 @@
     "name": "Cappuccino Ý",
     "image": "https://images.unsplash.com/photo-1604909052743-94e838986d24?w=900&auto=format&fit=crop&q=60",
     "price": "42000",
-    "priceSale": "",
+    "priceSale": "42000",
+    "salePercent": 0,
+    "soldCount": 430,
     "location": "STORE",
     "categoryId": "COFFEE"
   },
-
   {
     "id": "6",
     "name": "Trà đào cam sả mát lạnh",
     "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=900&auto=format&fit=crop&q=60",
     "price": "35000",
     "priceSale": "32000",
+    "salePercent": 9,
+    "soldCount": 1120,
     "location": "ONLINE",
     "categoryId": "MILKTEA"
   },
@@ -59,7 +70,9 @@
     "name": "Trà sữa truyền thống",
     "image": "https://images.unsplash.com/photo-1685644291576-ea3d97fb0a67?q=80&w=1160&auto=format&fit=crop",
     "price": "30000",
-    "priceSale": "",
+    "priceSale": "30000",
+    "salePercent": 0,
+    "soldCount": 1340,
     "location": "ONLINE",
     "categoryId": "MILKTEA"
   },
@@ -68,7 +81,9 @@
     "name": "Trà sữa matcha Nhật",
     "image": "https://images.unsplash.com/photo-1587080413959-06b859fb107d?q=80&w=1184&auto=format&fit=crop",
     "price": "36000",
-    "priceSale": "",
+    "priceSale": "36000",
+    "salePercent": 0,
+    "soldCount": 760,
     "location": "ONLINE",
     "categoryId": "MILKTEA"
   },
@@ -77,17 +92,20 @@
     "name": "Trà vải thanh mát",
     "image": "https://images.unsplash.com/photo-1765100214310-81fb4c062b25?w=900&auto=format&fit=crop&q=60",
     "price": "34000",
-    "priceSale": "",
+    "priceSale": "34000",
+    "salePercent": 0,
+    "soldCount": 610,
     "location": "STORE",
     "categoryId": "MILKTEA"
   },
-
   {
     "id": "10",
     "name": "Sinh tố xoài tươi",
     "image": "https://images.unsplash.com/photo-1543826173-70651703c5a4?w=900&auto=format&fit=crop&q=60",
     "price": "39000",
-    "priceSale": "",
+    "priceSale": "39000",
+    "salePercent": 0,
+    "soldCount": 480,
     "location": "STORE",
     "categoryId": "FLOAT"
   },
@@ -96,7 +114,9 @@
     "name": "Sinh tố dâu mát lạnh",
     "image": "https://images.unsplash.com/photo-1604909052743-94e838986d24?w=900&auto=format&fit=crop&q=60",
     "price": "39000",
-    "priceSale": "",
+    "priceSale": "39000",
+    "salePercent": 0,
+    "soldCount": 520,
     "location": "STORE",
     "categoryId": "FLOAT"
   },
@@ -106,16 +126,19 @@
     "image": "https://images.unsplash.com/photo-1678016935857-396bfff65aae?w=900&auto=format&fit=crop&q=60",
     "price": "45000",
     "priceSale": "41000",
+    "salePercent": 9,
+    "soldCount": 690,
     "location": "STORE",
     "categoryId": "FLOAT"
   },
-
   {
     "id": "13",
     "name": "Bánh tiramisu Ý",
     "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=900&auto=format&fit=crop&q=60",
     "price": "45000",
-    "priceSale": "",
+    "priceSale": "45000",
+    "salePercent": 0,
+    "soldCount": 360,
     "location": "STORE",
     "categoryId": "CAKE"
   },
@@ -124,7 +147,9 @@
     "name": "Bánh cheesecake phô mai",
     "image": "https://images.unsplash.com/photo-1685644291576-ea3d97fb0a67?q=80&w=1160&auto=format&fit=crop",
     "price": "48000",
-    "priceSale": "",
+    "priceSale": "48000",
+    "salePercent": 0,
+    "soldCount": 410,
     "location": "STORE",
     "categoryId": "CAKE"
   },
@@ -133,37 +158,42 @@
     "name": "Bánh su kem Pháp",
     "image": "https://images.unsplash.com/photo-1587080413959-06b859fb107d?q=80&w=1184&auto=format&fit=crop",
     "price": "25000",
-    "priceSale": "",
+    "priceSale": "25000",
+    "salePercent": 0,
+    "soldCount": 890,
     "location": "STORE",
     "categoryId": "CAKE"
   },
-
   {
     "id": "17",
     "name": "Kem vani mát lạnh",
     "image": "https://images.unsplash.com/photo-1654546518361-eef83e447521?w=900&auto=format&fit=crop&q=60",
     "price": "20000",
-    "priceSale": "",
+    "priceSale": "20000",
+    "salePercent": 0,
+    "soldCount": 760,
     "location": "STORE",
     "categoryId": "CREAM"
   },
-
   {
     "id": "20",
     "name": "Khoai tây chiên giòn",
     "image": "https://images.unsplash.com/photo-1604909052743-94e838986d24?w=900&auto=format&fit=crop&q=60",
     "price": "25000",
-    "priceSale": "",
+    "priceSale": "25000",
+    "salePercent": 0,
+    "soldCount": 1020,
     "location": "STORE",
     "categoryId": "FOOD"
   },
-
   {
     "id": "23",
     "name": "Trân châu đen topping",
     "image": "https://images.unsplash.com/photo-1765100214310-81fb4c062b25?w=900&auto=format&fit=crop&q=60",
     "price": "8000",
-    "priceSale": "",
+    "priceSale": "8000",
+    "salePercent": 0,
+    "soldCount": 215,
     "location": "ONLINE",
     "categoryId": "OTHER"
   }

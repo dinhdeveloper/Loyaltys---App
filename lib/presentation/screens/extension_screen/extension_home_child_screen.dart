@@ -35,7 +35,7 @@ extension ExHomeChild on HomeScreenState {
 
   Widget viewScrollHorizontalItemSaleWidget(List<ProductItem>? listProduct) {
     return SizedBox(
-      height: 240,
+      height: 226,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: listProduct?.length ?? 0,
@@ -54,7 +54,7 @@ extension ExHomeChild on HomeScreenState {
               },
               child: CouponCard(
                 height: double.infinity,
-                width: 120,
+                width: 130,
                 curvePosition: 120,
                 curveRadius: 15,
                 borderRadius: 10,
@@ -79,12 +79,12 @@ extension ExHomeChild on HomeScreenState {
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: AppImage(
-              imageUrl: product?.image ?? '', height: 100, width: 110,
+              imageUrl: product?.image ?? '', height: 100, width: 130,
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 5, left: 2, right: 2),
-            child: BestSellerProgressBar(progress: 0.82, soldCount: 120, fillColor: Colors.lightGreenAccent, iconColor: Colors.red),
+            child: BestSellerProgressBar(progress:  getSoldRatio(product?.soldCount), soldCount: product?.soldCount ?? 0, fillColor: Colors.lightGreenAccent, iconColor: Colors.red),
           ),
         ],
       ),
@@ -92,37 +92,41 @@ extension ExHomeChild on HomeScreenState {
   }
 
   Widget secondChildMegaSale(ProductItem? product) {
+    final salePercent = product?.salePercent ?? 0;
     return Container(
-      padding: const EdgeInsets.all(6),
+      padding: const EdgeInsets.all(5),
       width: double.infinity,
       decoration: const BoxDecoration(
         border: DashedBorder(dashLength: 2, top: BorderSide(color: Colors.grey, width: 0.5)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           UnitText(
             text: "${product?.name}",
-            fontFamily: Assets.sfProMedium,
-            fontWeight: FontWeight.w700,
-            fontSize: 14,
-            maxLines: 2,
+            fontWeight: FontWeight.w200,
+            fontSize: 15,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis
           ),
-          const Spacer(),
-          Row(
-            children: [
-              UnitText(text: "-50%", fontFamily: Assets.sfProMedium, fontSize: 12, color: Colors.green[500]),
-              const SizedBox(width: 5),
-              UnitText(
-                text: product?.priceSale.isNotEmpty == true  ? "${formatVND(int.parse("${product?.priceSale}"))} VNĐ" : "",
-                fontFamily: Assets.sfProMedium,
-                fontSize: 12,
-                lineThrough: true,
-                color: Colors.grey,
-                lineThroughColor: Colors.grey,
-              ),
-            ],
-          ),
+          if(salePercent > 0)
+            Row(
+              children: [
+                UnitText(text: "-$salePercent%", fontFamily: Assets.sfProMedium, fontSize: 12, color: Colors.green[500]),
+                const SizedBox(width: 5),
+                UnitText(
+                  text: product?.priceSale.isNotEmpty == true  ? "${formatVND(int.parse("${product?.priceSale}"))} VNĐ" : "",
+                  fontFamily: Assets.sfProMedium,
+                  fontSize: 12,
+                  lineThrough: true,
+                  color: Colors.grey,
+                  lineThroughColor: Colors.grey,
+                ),
+              ],
+            )
+          else
+            const SizedBox(height: 7),
           UnitText(
             text: product?.price.isNotEmpty == true ? "${formatVND(int.parse("${product?.price}"))} VNĐ" : "",
             fontFamily: Assets.sfProMedium,
