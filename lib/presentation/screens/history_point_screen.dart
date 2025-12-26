@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:remindbless/core/app_assets.dart';
 import 'package:remindbless/core/app_theme.dart';
 import 'package:remindbless/data/models/history_point/history_point.dart';
+import 'package:remindbless/presentation/widgets/common/header_delegate.dart';
 import 'package:remindbless/presentation/widgets/common/unit_text.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
@@ -52,7 +53,7 @@ class _HistoryPointScreenState extends State<HistoryPointScreen> {
             /// HEADER PINNED
             SliverPersistentHeader(
               pinned: true,
-              delegate: _HeaderDelegate(),
+              delegate: HeaderDelegate(title: "Lịch Sử Tích Điểm"),
             ),
 
             /// SHIMMER
@@ -218,32 +219,4 @@ class _HistoryPointScreenState extends State<HistoryPointScreen> {
       ),
     );
   }
-}
-
-/// ===== HEADER =====
-class _HeaderDelegate extends SliverPersistentHeaderDelegate {
-  @override
-  double get minExtent => 50;
-
-  @override
-  double get maxExtent => 50;
-
-  @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Container(
-      color: Colors.white,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      alignment: Alignment.centerLeft,
-      child: const UnitText(
-        text: "Lịch sử tích điểm",
-        color: AppColors.colorButtonBold,
-        fontSize: 18,
-        fontFamily: Assets.sfProSemibold,
-      ),
-    );
-  }
-
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
-      false;
 }

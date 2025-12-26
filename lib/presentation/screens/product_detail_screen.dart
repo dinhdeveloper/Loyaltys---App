@@ -329,13 +329,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               );
             },
             child: Container(
-              width: 80,
-              height: 100,
+              width: 70,
+              height: 90,
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [Color(0xff213247), Color(0xFFA8CAF6)],
+                  colors: [Colors.orange, Color(0xFFFFFFFF)],
                 ),
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(12),topRight: Radius.circular(12)),
               ),
@@ -344,9 +344,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    UnitText(text: "Mua", fontFamily: Assets.sfProMedium, color: Colors.white, fontWeight: FontWeight.w800, fontSize: 20
+                    UnitText(text: "Mua", fontFamily: Assets.sfProMedium, color: Colors.white, fontWeight: FontWeight.w700, fontSize: 17
                     ),
-                    SvgPicture.asset(Assets.iconNextTop,width: 40)
+                    SvgPicture.asset(Assets.iconNextTop,width: 35)
                   ],
                 ),
               ),

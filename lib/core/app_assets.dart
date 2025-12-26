@@ -23,6 +23,7 @@ class Assets{
   static const String iconNextAction = 'assets/images/next_action.svg';
   static const String iconHistory = 'assets/images/icon_history.svg';
   static const String iconCart = 'assets/images/icon_cart_shopping.svg';
+  static const String iconCartHome = 'assets/images/icon_cart_shopping2.svg';
   static const String iconEditProfile = 'assets/images/icon_edit_profile.svg';
   static const String iconHandPointer = 'assets/images/icon_pointer.svg';
   static const String iconCloseBack = 'assets/images/icon_close_back.svg';

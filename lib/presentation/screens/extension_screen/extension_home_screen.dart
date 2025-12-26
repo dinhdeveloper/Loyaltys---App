@@ -1,11 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:remindbless/core/app_assets.dart';
 import 'package:remindbless/core/path_router.dart';
 import 'package:remindbless/data/models/data_home.dart';
 import 'package:remindbless/presentation/screens/home_screen.dart';
+import 'package:remindbless/presentation/widgets/common/app_image.dart';
 import 'package:remindbless/presentation/widgets/common/unit_text.dart';
+import 'package:remindbless/viewmodel/category_viewmodel.dart';
 
 extension ExHomeScreen on HomeScreenState{
   Widget searchWidget() {
@@ -16,45 +19,62 @@ extension ExHomeScreen on HomeScreenState{
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              UnitText(text: "Chào Buổi Sáng", fontSize: 16, fontWeight: FontWeight.w500, fontFamily: Assets.sfProMediumItalic),
+              UnitText(
+                text: "Chào Buổi Sáng",
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                fontFamily: Assets.sfProMediumItalic,
+              ),
               const SizedBox(width: 4),
-              UnitText(text: "DinhTC", fontSize: 16, fontWeight: FontWeight.w900, fontFamily: Assets.sfProMediumItalic),
+              UnitText(
+                text: "DinhTC",
+                fontSize: 16,
+                fontWeight: FontWeight.w900,
+                fontFamily: Assets.sfProMediumItalic,
+              ),
             ],
           ),
-          Row(children: [
-            SvgPicture.asset(Assets.iconSearchHome),
-            const SizedBox(width: 10),
-            GestureDetector(
-              onTap: (){
-                Navigator.pushNamed(context, PathRouter.notificationListScreen);
-              },
-              child: Container(
-                color: Colors.transparent,
+
+          /// ===== ICON RIGHT =====
+          Row(
+            children: [
+              /// CART
+              GestureDetector(
+                onTap: (){
+                  Navigator.pushNamed(
+                    context,
+                    PathRouter.cartScreen,
+                  );
+                },
                 child: Stack(
                   clipBehavior: Clip.none,
                   children: [
-                    SvgPicture.asset(Assets.iconNoti),
-
+                    SvgPicture.asset(Assets.iconCartHome),
                     Positioned(
                       top: -3,
                       right: -3,
                       child: Container(
                         padding: const EdgeInsets.all(2),
                         decoration: const BoxDecoration(
-                          color: Colors.red, shape: BoxShape.circle,
+                          color: Colors.red,
+                          shape: BoxShape.circle,
                           border: Border.fromBorderSide(
                             BorderSide(color: Colors.white, width: 1.5),
                           ),
                         ),
-                        constraints: const BoxConstraints(minWidth: 14, minHeight: 14),
-                        child: Center(
+                        constraints: const BoxConstraints(
+                          minWidth: 14,
+                          minHeight: 14,
+                        ),
+                        child: const Center(
                           child: Text(
-                            '3',
+                            '6',
                             style: TextStyle(
-                              color: Colors.white, fontSize: 8, fontWeight: FontWeight.bold, height: 1.1,
+                              color: Colors.white,
+                              fontSize: 8,
+                              fontWeight: FontWeight.bold,
+                              height: 1.1,
                             ),
                           ),
                         ),
@@ -63,8 +83,51 @@ extension ExHomeScreen on HomeScreenState{
                   ],
                 ),
               ),
-            ),
-          ]),
+
+              const SizedBox(width: 10),
+
+              /// NOTI
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(
+                      context, PathRouter.notificationListScreen);
+                },
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    SvgPicture.asset(Assets.iconNoti),
+                    Positioned(
+                      top: -3,
+                      right: -3,
+                      child: Container(
+                        padding: const EdgeInsets.all(2),
+                        decoration: const BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                          border: Border.fromBorderSide(
+                            BorderSide(color: Colors.white, width: 1.5),
+                          ),
+                        ),
+                        constraints:
+                        const BoxConstraints(minWidth: 14, minHeight: 14),
+                        child: const Center(
+                          child: Text(
+                            '3',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 8,
+                              fontWeight: FontWeight.bold,
+                              height: 1.1,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -164,9 +227,13 @@ extension ExHomeScreen on HomeScreenState{
     );
   }
 
-  Widget gridViewCategory(double iconBoxSize, double iconImageSize){
+  Widget gridViewCategory(double iconBoxSize, double iconImageSize) {
+    // Lấy category từ ViewModel
+    final vm = context.watch<CategoryViewModel>();
+    final categories = vm.categories; // giả sử bạn đã load danh sách category trong VM
+
     return Padding(
-      padding: const EdgeInsets.only(top:10, left: 15, right: 15),
+      padding: const EdgeInsets.only(top: 10, left: 15, right: 15),
       child: GridView.count(
         crossAxisCount: 4,
         shrinkWrap: true,
@@ -175,21 +242,22 @@ extension ExHomeScreen on HomeScreenState{
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
         childAspectRatio: 0.77,
-        children: itemsHomeCategory.map((it) {
+        children: categories.map((it) {
           return GestureDetector(
-            onTap: (){
+            onTap: () {
               Navigator.pushNamed(
                 context,
                 PathRouter.categoryListScreen,
                 arguments: {
-                  'categoryId': it.idCategory,
+                  'categoryId': it.categoryId, // từ model Category
+                  'categoryKey': it.categoryKey, // nếu cần
                 },
               );
             },
             child: IconTile(
-              idCategory: it.idCategory,
-              assetPath: it.assetPath,
-              label: it.label,
+              idCategory: "${it.categoryId}",
+              assetPath: it.categoryImage, // API trả ra URL đầy đủ
+              label: it.categoryName,
               boxSize: iconBoxSize,
               imageSize: iconImageSize,
             ),
@@ -235,8 +303,8 @@ class IconTile extends StatelessWidget {
               )
             ],
           ),
-          child: Image.asset(
-            assetPath,
+          child: AppImage(
+            imageUrl: assetPath,
             width: imageSize,
             height: imageSize,
             fit: BoxFit.contain,

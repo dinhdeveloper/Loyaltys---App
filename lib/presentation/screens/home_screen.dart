@@ -29,7 +29,7 @@ class HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMi
   Future<void> _initLoad() async {
     AppLoading.show();
     try {
-      await Future.delayed(const Duration(seconds: 1));
+      await Future.delayed(const Duration(milliseconds: 400));
       await _loadProducts();
     } finally {
       AppLoading.dismiss();

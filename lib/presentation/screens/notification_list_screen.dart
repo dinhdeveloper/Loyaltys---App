@@ -3,6 +3,7 @@ import 'package:remindbless/core/app_assets.dart';
 import 'package:remindbless/core/app_theme.dart';
 import 'package:remindbless/data/models/notifications/notification_item.dart';
 import 'package:remindbless/presentation/widgets/common/bottom_bar_widget.dart';
+import 'package:remindbless/presentation/widgets/common/header_delegate.dart';
 import 'package:remindbless/presentation/widgets/common/unit_text.dart';
 
 import 'dart:convert';
@@ -51,7 +52,7 @@ class _NotificationListScreenState extends State<NotificationListScreen> {
             /// HEADER PINNED
             SliverPersistentHeader(
               pinned: true,
-              delegate: _HeaderDelegate(),
+              delegate: HeaderDelegate(title: "Danh Sách Thông Báo"),
             ),
 
             /// SHIMMER
@@ -218,31 +219,5 @@ class _NotificationListScreenState extends State<NotificationListScreen> {
       ),
     );
   }
-}
-
-class _HeaderDelegate extends SliverPersistentHeaderDelegate {
-  @override
-  double get minExtent => 60;
-
-  @override
-  double get maxExtent => 60;
-
-  @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Container(
-      color: Colors.white,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      alignment: Alignment.centerLeft,
-      child: const UnitText(
-        text: "Danh sách thông báo",
-        color: AppColors.colorButtonBold,
-        fontSize: 20,
-        fontFamily: Assets.sfProSemibold,
-      ),
-    );
-  }
-
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) => false;
 }
 

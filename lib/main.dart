@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:remindbless/core/go_router.dart';
 import 'package:remindbless/core/path_router.dart';
 
+import 'core/injector.dart';
+
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() {
-  runApp(const MainApp());
+  runApp(
+    Injector.wrapWithProviders(
+      child: const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {

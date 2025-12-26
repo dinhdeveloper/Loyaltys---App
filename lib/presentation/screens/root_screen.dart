@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:remindbless/core/app_assets.dart';
 import 'package:remindbless/presentation/screens/cart_screen.dart';
 import 'package:remindbless/presentation/screens/scan_qrcode_screen.dart';
+import 'package:remindbless/presentation/screens/search_screen.dart';
 import 'package:remindbless/presentation/screens/setting_screen.dart';
 import 'package:remindbless/presentation/widgets/common/unit_text.dart';
 
@@ -25,7 +26,7 @@ class _RootScreenState extends State<RootScreen> {
     final screens = [
       HomeScreen(key: _homeKey),
       HistoryPointScreen(),
-      CartScreen(),
+      SearchScreen(),
       ScanQrCodeScreen(),
       SettingScreen(),
     ];
@@ -80,7 +81,7 @@ class _RootScreenState extends State<RootScreen> {
           children: [
             _buildNavIcon(Assets.iconHome, 0, "Trang chủ"),
             _buildNavIcon(Assets.iconHistory, 1, "Lịch sử"),
-            _buildNavIcon(Assets.iconCart, 2, "Giỏ hàng"),
+            _buildNavIcon(Assets.iconSearch, 2, "Tìm kiếm"),
             _buildNavIcon(Assets.iconScanQR, 3, "Tích điểm"),
             _buildNavIcon(Assets.iconProfile, 4, "Tài khoản"),
           ],

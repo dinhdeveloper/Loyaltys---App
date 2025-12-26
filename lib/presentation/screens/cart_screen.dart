@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:remindbless/core/app_assets.dart';
-import 'package:remindbless/core/app_theme.dart';
+import 'package:remindbless/presentation/widgets/common/app_image.dart';
+import 'package:remindbless/presentation/widgets/common/header_delegate.dart';
 import 'package:remindbless/presentation/widgets/common/unit_text.dart';
 
 class CartScreen extends StatefulWidget {
@@ -11,6 +12,8 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  int quantity = 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,42 +22,198 @@ class _CartScreenState extends State<CartScreen> {
         bottom: false,
         child: CustomScrollView(
           slivers: [
-            /// HEADER PINNED
-            SliverPersistentHeader(
-              pinned: true,
-              delegate: _HeaderDelegate(),
+            /// ===== HEADER PINNED =====
+            SliverPersistentHeader(pinned: true, delegate: HeaderDelegate(title: "Giỏ Hàng")),
+
+            /// ===== CART LIST =====
+            SliverPadding(
+              padding: const EdgeInsets.all(16),
+              sliver: SliverList(delegate: SliverChildBuilderDelegate((context, index) => _cartItem(index: index), childCount: 10)),
+            ),
+          ],
+        ),
+      ),
+
+      /// ===== BOTTOM CHECKOUT =====
+      bottomNavigationBar: _bottomCheckout(),
+    );
+  }
+
+  /// ================= CART ITEM =================
+  Widget _cartItem({required int index}) {
+    return Dismissible(
+      key: ValueKey(index),
+      direction: DismissDirection.endToStart,
+      background: Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.only(right: 20),
+        alignment: Alignment.centerRight,
+        decoration: BoxDecoration(
+          color: Colors.redAccent,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: const UnitText(
+          text: "Xóa",
+          color: Colors.white,
+          fontSize: 16,
+          fontFamily: Assets.sfProMedium,
+        ),
+      ),
+      onDismissed: (_) {
+        // TODO: remove item khỏi list
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.09),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            /// IMAGE
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: AppImage(
+                imageUrl:
+                "https://images.unsplash.com/photo-1678016935857-396bfff65aae",
+                width: 80,
+                height: 80,
+              ),
+            ),
+
+            const SizedBox(width: 12),
+
+            /// INFO
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const UnitText(
+                    text: "Cà phê sữa đá",
+                    fontFamily: Assets.sfProLight,
+                  ),
+
+                  const SizedBox(height: 6),
+
+                  /// PRICE
+                  Row(
+                    children: const [
+                      UnitText(
+                        text: "25.000đ",
+                        fontSize: 16,
+                        color: Colors.orange,
+                        fontFamily: Assets.sfProBold,
+                      ),
+                      SizedBox(width: 8),
+                      UnitText(
+                        text: "35.000đ",
+                        fontSize: 13,
+                        color: Colors.grey,
+                        lineThrough: true,
+                        fontFamily: Assets.sfProRegular,
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  /// QUANTITY
+                  Row(
+                    children: [
+                      _qtyButton(
+                        icon: Icons.remove,
+                        onTap: () {
+                          if (quantity > 1) {
+                            setState(() => quantity--);
+                          }
+                        },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: UnitText(
+                          text: "$quantity",
+                          fontSize: 15,
+                          fontFamily: Assets.sfProMedium,
+                        ),
+                      ),
+                      _qtyButton(
+                        icon: Icons.add,
+                        onTap: () {
+                          setState(() => quantity++);
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),
       ),
     );
   }
-}
 
-/// ===== HEADER =====
-class _HeaderDelegate extends SliverPersistentHeaderDelegate {
-  @override
-  double get minExtent => 50;
-
-  @override
-  double get maxExtent => 50;
-
-  @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Container(
-      color: Colors.white,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      alignment: Alignment.centerLeft,
-      child: const UnitText(
-        text: "Giỏ Hàng",
-        color: AppColors.colorButtonBold,
-        fontSize: 18,
-        fontFamily: Assets.sfProSemibold,
+  Widget _qtyButton({required IconData icon, required VoidCallback onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 28,
+        width: 28,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(6),
+          border: Border.all(color: Colors.grey.shade300),
+        ),
+        child: Icon(icon, size: 16),
       ),
     );
   }
 
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
-      false;
+  /// ================= BOTTOM CHECKOUT =================
+  Widget _bottomCheckout() {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.08), blurRadius: 12, offset: const Offset(0, -4))],
+      ),
+      child: SafeArea(
+        top: false,
+        child: Row(
+          children: [
+            /// TOTAL
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                UnitText(text: "Tổng thanh toán", fontSize: 13, color: Colors.grey),
+                SizedBox(height: 4),
+                UnitText(text: "75.000đ", fontSize: 18, color: Colors.orange, fontFamily: Assets.sfProBold),
+              ],
+            ),
+
+            const Spacer(),
+
+            /// CHECKOUT BUTTON
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.orange,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+              ),
+              child: const UnitText(text: "Thanh toán", color: Colors.white, fontSize: 15, fontFamily: Assets.sfProMedium),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
