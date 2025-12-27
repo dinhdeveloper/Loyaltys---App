@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:remindbless/data/server/api_service.dart';
+import 'package:remindbless/services/network_service.dart';
 import 'package:remindbless/usecases/categories_usecase.dart';
 import 'package:remindbless/usecases/products_usecase.dart';
 import 'package:remindbless/viewmodel/category_viewmodel.dart';
@@ -17,7 +18,7 @@ final getIt = GetIt.instance;
 void setupLocator() {
   // Service / Repository
   getIt.registerLazySingleton<ApiService>(() => ApiService());
-
+  getIt.registerLazySingleton<NetworkService>(() => NetworkService());
   // UseCase
   getIt.registerLazySingleton<CategoryUseCase>(() => CategoryUseCase(getIt<ApiService>()));
   getIt.registerLazySingleton<ProductsUseCase>(() => ProductsUseCase(getIt<ApiService>()));
