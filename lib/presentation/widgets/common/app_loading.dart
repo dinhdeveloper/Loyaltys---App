@@ -91,6 +91,11 @@ class _LoadingOverlay2State extends State<_LoadingOverlay2>
       ),
     );
   }
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 }
 
 

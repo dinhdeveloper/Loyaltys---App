@@ -8,6 +8,7 @@ import 'core/injector.dart';
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() {
+  setupLocator();
   runApp(
     Injector.wrapWithProviders(
       child: const MainApp(),

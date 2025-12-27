@@ -249,8 +249,8 @@ extension ExHomeScreen on HomeScreenState{
                 context,
                 PathRouter.categoryListScreen,
                 arguments: {
-                  'categoryId': it.categoryId, // từ model Category
-                  'categoryKey': it.categoryKey, // nếu cần
+                  'category': it,
+                  'listCategory': categories,
                 },
               );
             },

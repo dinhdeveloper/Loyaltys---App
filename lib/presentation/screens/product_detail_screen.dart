@@ -3,46 +3,55 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobkit_dashed_border/mobkit_dashed_border.dart';
 import 'package:remindbless/core/app_assets.dart';
 import 'package:remindbless/core/app_theme.dart';
+import 'package:remindbless/core/base_screen.dart';
 import 'package:remindbless/core/path_router.dart';
 import 'package:remindbless/data/models/products/product_item.dart';
+import 'package:remindbless/data/models/products/product_model.dart';
 import 'package:remindbless/presentation/utils/formatters.dart';
 import 'package:remindbless/presentation/widgets/common/app_image.dart';
 import 'package:remindbless/presentation/widgets/common/app_loading.dart';
 import 'package:remindbless/presentation/widgets/common/best_seller_progress_bar.dart';
 import 'package:remindbless/presentation/widgets/common/ticket_common.dart';
 import 'package:remindbless/presentation/widgets/common/unit_text.dart';
+import 'package:remindbless/viewmodel/product_viewmodel.dart';
 import 'package:share_plus/share_plus.dart';
 
-class ProductDetailScreen extends StatefulWidget {
+class ProductDetailScreen extends BaseScreen<ProductViewmodel> {
   const ProductDetailScreen({super.key});
 
   @override
   State<ProductDetailScreen> createState() => _ProductDetailScreenState();
 }
 
-class _ProductDetailScreenState extends State<ProductDetailScreen> {
-  ProductItem? product;
+class _ProductDetailScreenState extends BaseScreenState<ProductViewmodel, ProductDetailScreen> {
+  Product? product;
   List<ProductItem> listProduct = [];
 
   int quantity = 1;
-  int unitPrice = 0; // priceSale của 1 SP
-  int totalPrice = 0;
+  double unitPrice = 0; // priceSale của 1 SP
+  double totalPrice = 0;
 
+  late final PageController _pageController;
+  int _currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    final args =
-    ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
     product = args?['product'];
 
-    unitPrice = int.tryParse(product?.priceSale ?? "0") ?? 0;
+    unitPrice = product?.productPriceSale ?? 0;
     totalPrice = unitPrice;
 
     _initLoad();
   }
-
 
   Future<void> _initLoad() async {
     AppLoading.show();
@@ -73,7 +82,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildChild(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       body: Column(
@@ -82,10 +91,48 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           /// ===== IMAGE PRODUCT =====
           Stack(
             children: [
-              AppImage(
-                imageUrl: product?.image ?? "",
-                height: 300,
-                width: double.infinity,
+              Stack(
+                children: [
+                  SizedBox(
+                    height: 300,
+                    child: PageView.builder(
+                      controller: _pageController,
+                      itemCount: product?.imagesProduct.length ?? 0,
+                      onPageChanged: (index) => setState(() => _currentIndex = index),
+                      itemBuilder: (_, index) {
+                        return AppImage(
+                          imageUrl: product!.imagesProduct[index].imageUrl,
+                          width: double.infinity,
+                          height: 300,
+                          fit: BoxFit.cover,
+                        );
+                      },
+                    ),
+                  ),
+
+                  /// DOT
+                  Positioned(
+                    bottom: 50,
+                    left: 0,
+                    right: 0,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(
+                        product?.imagesProduct.length ?? 0,
+                            (index) => AnimatedContainer(
+                          duration: const Duration(milliseconds: 250),
+                          margin: const EdgeInsets.symmetric(horizontal: 4),
+                          width: _currentIndex == index ? 10 : 5,
+                          height: 5,
+                          decoration: BoxDecoration(
+                            color: _currentIndex == index ? Colors.red : Colors.white70,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
 
               /// BACK
@@ -95,10 +142,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 child: SafeArea(
                   child: Padding(
                     padding: const EdgeInsets.all(12),
-                    child: GestureDetector(
-                      onTap: () => Navigator.pop(context),
-                      child: _circleIcon(Icons.arrow_back_ios_new),
-                    ),
+                    child: GestureDetector(onTap: () => Navigator.pop(context), child: _circleIcon(Icons.arrow_back_ios_new)),
                   ),
                 ),
               ),
@@ -112,9 +156,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     padding: const EdgeInsets.all(12),
                     child: GestureDetector(
                       onTap: () {
-                        SharePlus.instance.share(
-                          ShareParams(text: product?.name ?? ""),
-                        );
+                        SharePlus.instance.share(ShareParams(text: product?.productName ?? ""));
                       },
                       child: _circleIcon(Icons.share_outlined),
                     ),
@@ -131,17 +173,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   height: 40,
                   decoration: BoxDecoration(
                     color: Colors.grey.shade100,
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(25),
-                      topRight: Radius.circular(25),
-                    ),
+                    borderRadius: const BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25)),
                   ),
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                   child: UnitText(
-                    text: product?.priceSale.isNotEmpty == true
-                        ? formatVND(int.parse(product!.priceSale))
-                        : "",
+                    text: "${formatVND(product?.productPriceSale ?? 0)} VNĐ",
                     fontSize: 20,
                     fontFamily: Assets.sfProBold,
                     color: Colors.orange,
@@ -158,8 +194,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 children: [
                   /// ===== TITLE & PRICE =====
                   Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                     child: CouponCard(
                       width: double.infinity,
                       curveRadius: 20,
@@ -190,29 +225,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                   Assets.iconMinus,
                                   width: 28,
                                   height: 28,
-                                  colorFilter: quantity == 1
-                                      ? const ColorFilter.mode(
-                                      Colors.grey, BlendMode.srcIn)
-                                      : null,
+                                  colorFilter: quantity == 1 ? const ColorFilter.mode(Colors.grey, BlendMode.srcIn) : null,
                                 ),
                               ),
                               Padding(
-                                padding:
-                                const EdgeInsets.symmetric(horizontal: 12),
-                                child: UnitText(
-                                  text: "$quantity",
-                                  fontSize: 16,
-                                  fontFamily: Assets.sfProMedium,
-                                ),
+                                padding: const EdgeInsets.symmetric(horizontal: 12),
+                                child: UnitText(text: "$quantity", fontSize: 16, fontFamily: Assets.sfProMedium),
                               ),
-                              GestureDetector(
-                                onTap: _increaseQty,
-                                child: SvgPicture.asset(
-                                  Assets.iconPlus,
-                                  width: 28,
-                                  height: 28,
-                                ),
-                              ),
+                              GestureDetector(onTap: _increaseQty, child: SvgPicture.asset(Assets.iconPlus, width: 28, height: 28)),
                             ],
                           ),
 
@@ -225,7 +245,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             fontFamily: Assets.sfProLight,
                             color: Colors.black87,
                             text:
-                            "Ta tìm gì trong một tách cà phê: một chút tỉnh táo, một chút lãng du nghênh ngang ngồi lại bất động giữa phố thị...",
+                                "Ta tìm gì trong một tách cà phê: một chút tỉnh táo, một chút lãng du nghênh ngang ngồi lại bất động giữa phố thị...",
                           ),
                         ],
                       ),
@@ -243,17 +263,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           const SizedBox(height: 10),
                           Padding(
                             padding: const EdgeInsets.only(left: 16),
-                            child: UnitText(
-                              text: "Có thể bạn sẽ thích",
-                              fontSize: 16,
-                              fontFamily: Assets.sfProMedium,
-                            ),
+                            child: UnitText(text: "Có thể bạn sẽ thích", fontSize: 16, fontFamily: Assets.sfProMedium),
                           ),
                           viewScrollHorizontalItemSaleWidget(),
                         ],
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -263,16 +279,21 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       bottomNavigationBar: footerDetail(context),
     );
   }
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+}
+
+extension WidgetDetail on _ProductDetailScreenState {
 
   /// ===== COMMON =====
   Widget _circleIcon(IconData icon) {
     return Container(
       height: 35,
       width: 35,
-      decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.45),
-        shape: BoxShape.circle,
-      ),
+      decoration: BoxDecoration(color: Colors.black.withOpacity(0.45), shape: BoxShape.circle),
       child: Icon(icon, size: 18, color: Colors.white),
     );
   }
@@ -282,17 +303,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       color: Colors.white,
       borderRadius: BorderRadius.circular(16),
       border: Border.all(color: Colors.grey.withOpacity(0.15)),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.06),
-          blurRadius: 16,
-          offset: const Offset(0, 6),
-        )
-      ],
+      boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.06), blurRadius: 16, offset: const Offset(0, 6))],
     );
   }
 
-  Widget footerDetail(BuildContext context){
+  Widget footerDetail(BuildContext context) {
     return Container(
       color: Colors.white,
       child: Row(
@@ -300,53 +315,36 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            width: 100, height: 60,color: Colors.transparent,
+            width: 100,
+            height: 60,
+            color: Colors.transparent,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                UnitText(
-                  text:"Tổng tiền",
-                    fontFamily: Assets.sfProLight, color: Colors.black, fontWeight: FontWeight.w400, fontSize: 15
-                ),
-                UnitText(
-                  text: formatVND(totalPrice),
-                  fontSize: 20,
-                  fontFamily: Assets.sfProBold,
-                  color: Colors.orange,
-                )
+                UnitText(text: "Tổng tiền", fontFamily: Assets.sfProLight, color: Colors.black, fontWeight: FontWeight.w400, fontSize: 15),
+                UnitText(text: formatVND(totalPrice), fontSize: 20, fontFamily: Assets.sfProBold, color: Colors.orange),
               ],
             ),
           ),
           GestureDetector(
-            onTap: (){
-              Navigator.pushNamed(
-                context,
-                PathRouter.cartScreen,
-                arguments: {
-                  'product': product,
-                },
-              );
+            onTap: () {
+              Navigator.pushNamed(context, PathRouter.cartScreen, arguments: {'product': product});
             },
             child: Container(
               width: 70,
               height: 90,
               decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Colors.orange, Color(0xFFFFFFFF)],
-                ),
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(12),topRight: Radius.circular(12)),
+                gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Colors.orange, Color(0xFFFFFFFF)]),
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12)),
               ),
               child: Center(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    UnitText(text: "Mua", fontFamily: Assets.sfProMedium, color: Colors.white, fontWeight: FontWeight.w700, fontSize: 17
-                    ),
-                    SvgPicture.asset(Assets.iconNextTop,width: 35)
+                    UnitText(text: "Mua", fontFamily: Assets.sfProMedium, color: Colors.white, fontWeight: FontWeight.w700, fontSize: 17),
+                    SvgPicture.asset(Assets.iconNextTop, width: 35),
                   ],
                 ),
               ),
@@ -356,10 +354,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       ),
     );
   }
-}
 
-
-extension WidgetDetail on _ProductDetailScreenState {
   Widget viewScrollHorizontalItemSaleWidget() {
     return SizedBox(
       height: 220,
@@ -399,24 +394,31 @@ extension WidgetDetail on _ProductDetailScreenState {
           UnitText(
             text: itemSale?.name.toString() ?? "Đồ ăn healthy buổi trưa",
             fontFamily: Assets.sfProMedium,
-            fontWeight: FontWeight.w500, fontSize: 14, maxLines: 1,
+            fontWeight: FontWeight.w500,
+            fontSize: 14,
+            maxLines: 1,
           ),
-          if(itemSale?.salePercent != 0)
+          if (itemSale?.salePercent != 0)
             Row(
               children: [
                 UnitText(text: "-${itemSale?.salePercent}%", fontFamily: Assets.sfProMedium, fontSize: 12, color: Colors.green[500]),
                 const SizedBox(width: 5),
                 UnitText(
-                  text: product?.priceSale.isNotEmpty == true  ? formatVND(int.parse("${product?.priceSale}")) : "",
-                  fontFamily: Assets.sfProMedium, fontSize: 12,
-                  lineThrough: true, color: Colors.grey, lineThroughColor: Colors.grey,
+                  text: "${formatVND(product?.productPriceSale ?? 0)} VNĐ",
+                  fontFamily: Assets.sfProMedium,
+                  fontSize: 12,
+                  lineThrough: true,
+                  color: Colors.grey,
+                  lineThroughColor: Colors.grey,
                 ),
               ],
             ),
           UnitText(
-            text: product?.price.isNotEmpty == true ? "${formatVND(int.parse("${product?.price}"))} VNĐ" : "",
+            text: "${formatVND(product?.productPrice ?? 0)} VNĐ",
             fontFamily: Assets.sfProMedium,
-            fontWeight: FontWeight.w700, fontSize: 14, maxLines: 1,
+            fontWeight: FontWeight.w700,
+            fontSize: 14,
+            maxLines: 1,
           ),
         ],
       ),
@@ -436,7 +438,12 @@ extension WidgetDetail on _ProductDetailScreenState {
 
           Padding(
             padding: const EdgeInsets.only(top: 5, left: 2, right: 2),
-            child: BestSellerProgressBar(progress:  getSoldRatio(product?.soldCount), soldCount: product?.soldCount ?? 0, fillColor: Colors.lightGreenAccent, iconColor: Colors.red),
+            child: BestSellerProgressBar(
+              progress: getSoldRatio(product?.productSoldCount),
+              soldCount: product?.productSoldCount ?? 0,
+              fillColor: Colors.lightGreenAccent,
+              iconColor: Colors.red,
+            ),
           ),
         ],
       ),
@@ -444,19 +451,21 @@ extension WidgetDetail on _ProductDetailScreenState {
   }
 
   Widget productTitle() {
-    final salePercent = product?.salePercent ?? 0;
+    final salePercent = product?.productSalePercent ?? 0;
     return Padding(
       padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          UnitText(text: product?.name, fontSize: 20, fontFamily: Assets.sfProSemibold, maxLines: 2),
+          UnitText(text: product?.productName, fontSize: 20, fontFamily: Assets.sfProSemibold, maxLines: 2),
           const SizedBox(height: 3),
           UnitText(
-            text: (product?.price.isNotEmpty == true && salePercent > 0) ? "${formatVND(int.parse("${product?.price}"))} VNĐ" : "",
-            fontFamily: Assets.sfProMedium, fontSize: 16,
-            lineThrough: true, color: AppColors.colorButtonHome,
+            text: (salePercent > 0) ? "${formatVND(product?.productPrice ?? 0)} VNĐ" : "",
+            fontFamily: Assets.sfProMedium,
+            fontSize: 16,
+            lineThrough: true,
+            color: AppColors.colorButtonHome,
             lineThroughColor: AppColors.colorButtonHome,
           ),
         ],

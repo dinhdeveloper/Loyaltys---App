@@ -3,38 +3,34 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobkit_dashed_border/mobkit_dashed_border.dart';
 import 'package:remindbless/core/app_assets.dart';
 import 'package:remindbless/core/app_theme.dart';
+import 'package:remindbless/core/base_screen.dart';
 import 'package:remindbless/core/path_router.dart' show PathRouter;
-import 'package:remindbless/data/models/data_home.dart';
-import 'package:remindbless/data/models/products/product_item.dart';
+import 'package:remindbless/data/models/category/category_model.dart';
+import 'package:remindbless/data/models/products/product_model.dart';
 import 'package:remindbless/presentation/utils/formatters.dart';
 import 'package:remindbless/presentation/widgets/common/app_image.dart';
 import 'package:remindbless/presentation/widgets/common/bottom_bar_widget.dart';
 import 'package:remindbless/presentation/widgets/common/ticket_common.dart';
 import 'package:remindbless/presentation/widgets/common/unit_text.dart';
+import 'package:remindbless/viewmodel/category_viewmodel.dart';
 import 'package:shimmer/shimmer.dart';
 
-class CategoryListScreen extends StatefulWidget {
+class CategoryListScreen extends BaseScreen<CategoryViewModel> {
   const CategoryListScreen({super.key});
 
   @override
   State<CategoryListScreen> createState() => _CategoryListScreenState();
 }
 
-class _CategoryListScreenState extends State<CategoryListScreen> {
+class _CategoryListScreenState extends BaseScreenState<CategoryViewModel, CategoryListScreen>  {
   int _selectedIndex = 0;
   bool _loading = true;
 
   final ScrollController _categoryScrollController = ScrollController();
-  final List<GlobalKey> _categoryKeys = List.generate(itemsHomeCategory.length, (_) => GlobalKey());
-
-  List<ProductItem> _products = [];
-
-  // ---------------- INIT ----------------
-  @override
-  void initState() {
-    super.initState();
-    _loadProducts();
-  }
+  late List<GlobalKey> _categoryKeys;
+  List<Category> lisCategory = [];
+  List<Product> filteredProducts = [];
+  Category? category;
 
   @override
   void didChangeDependencies() {
@@ -42,39 +38,39 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
 
     final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
 
-    final categoryId = args?['categoryId'];
+    category = args?['category'];
+    lisCategory = args?['listCategory'];
 
-    if (categoryId != null) {
-      final index = itemsHomeCategory.indexWhere((e) => e.idCategory == categoryId);
+    if (category != null && category?.categoryKey != null) {
+      _categoryKeys = List.generate(lisCategory.length, (_) => GlobalKey());
 
-      if (index != -1) {
-        _selectedIndex = index;
+      // Tìm index của category hiện tại
+      final index = lisCategory.indexWhere((e) => e.categoryId == category?.categoryId);
+      if (index != -1) _selectedIndex = index;
 
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          _scrollToSelectedCategory();
-        });
-      }
+      getProductsByCategoryKey(category!.categoryKey);
     }
   }
 
-  @override
-  void dispose() {
-    _categoryScrollController.dispose();
-    super.dispose();
+  void getProductsByCategoryKey(String categoryKey){
+    provider.getProductsByCategoryKey(categoryKey).then((_) {
+      setState(() {
+        filteredProducts = _getFilteredProducts();
+        _loading = false;
+      });
+
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _scrollToSelectedCategory();
+      });
+    });
   }
 
-  // ---------------- LOAD DATA ----------------
-  Future<void> _loadProducts() async {
-    await Future.delayed(const Duration(seconds: 2)); // cho shimmer chạy mượt
-    _products = await ProductRepository.loadProducts();
-    setState(() => _loading = false);
-  }
+  List<Product> _getFilteredProducts() {
+    if (provider.products.isEmpty) return [];
 
-  // ---------------- FILTER PRODUCT ----------------
-  List<ProductItem> get filteredProducts {
-    final categoryId = itemsHomeCategory[_selectedIndex].idCategory;
-    if (categoryId == 'ALL') return _products;
-    return _products.where((e) => e.categoryId == categoryId).toList();
+    final categoryKey = lisCategory[_selectedIndex].categoryKey;
+    if (categoryKey == 'ALL') return provider.products;
+    return provider.products.where((e) => e.categoryKey == categoryKey).toList();
   }
 
   // ---------------- AUTO SCROLL ----------------
@@ -87,8 +83,8 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
 
   // ---------------- UI ----------------
   @override
-  Widget build(BuildContext context) {
-    final currentCategory = itemsHomeCategory[_selectedIndex];
+  Widget buildChild(BuildContext context) {
+    final currentCategory = lisCategory[_selectedIndex];
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -96,7 +92,7 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
         bottom: false,
         child: Column(
           children: [
-            _buildHeader(currentCategory.label),
+            _buildHeader(currentCategory.categoryName),
             _buildCategoryHorizontal(),
             const SizedBox(height: 10),
             Expanded(child: _loading ? _buildProductShimmer() : _buildProductGrid()),
@@ -123,7 +119,7 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
         controller: _categoryScrollController,
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 15),
-        itemCount: itemsHomeCategory.length,
+        itemCount: lisCategory.length,
         separatorBuilder: (_, _) => const SizedBox(width: 10),
         itemBuilder: (context, index) {
           final isSelected = index == _selectedIndex;
@@ -132,12 +128,13 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
             onTap: () {
               setState(() => _selectedIndex = index);
               WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToSelectedCategory());
+              getProductsByCategoryKey(lisCategory[index].categoryKey);
             },
             child: Container(
               key: _categoryKeys[index],
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(color: isSelected ? AppColors.colorButtonHome : Colors.grey[100], borderRadius: BorderRadius.circular(20)),
-              child: UnitText(text: itemsHomeCategory[index].label, fontSize: 14, color: isSelected ? Colors.white : Colors.black87),
+              child: UnitText(text: lisCategory[index].categoryName, fontSize: 14, color: isSelected ? Colors.white : Colors.black87),
             ),
           );
         },
@@ -200,7 +197,7 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
   Widget _buildProductShimmer() {
     return GridView.builder(
       padding: const EdgeInsets.fromLTRB(15, 15, 15, 10),
-      itemCount: 6,
+      itemCount: lisCategory.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         mainAxisSpacing: 10,
@@ -214,18 +211,18 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
   }
 
   // ---------------- PRODUCT UI ----------------
-  Widget _productImage(ProductItem product) {
+  Widget _productImage(Product product) {
     return Padding(
       padding: const EdgeInsets.all(5),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
-        child: AppImage(imageUrl: product.image, height: 140, width: double.infinity),
+        child: AppImage(imageUrl: product.imagesProduct.first.imageUrl, height: 140, width: double.infinity),
       ),
     );
   }
 
-  Widget _productInfo(ProductItem product) {
-    final salePercent = product.salePercent;
+  Widget _productInfo(Product product) {
+    final salePercent = product.productSalePercent;
     return Container(
       padding: const EdgeInsets.all(5),
       width: double.maxFinite,
@@ -236,14 +233,14 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          UnitText(text: product.name, fontFamily: Assets.sfProLight, fontWeight: FontWeight.w500, fontSize: 15, maxLines: 1, overflow: TextOverflow.ellipsis),
-          if (product.priceSale.isNotEmpty && salePercent > 0)
+          UnitText(text: product.productName, fontFamily: Assets.sfProLight, fontWeight: FontWeight.w500, fontSize: 15, maxLines: 1, overflow: TextOverflow.ellipsis),
+          if (salePercent > 0)
             Row(
               children: [
                 UnitText(text: "-$salePercent%", fontFamily: Assets.sfProMedium, fontSize: 12, color: Colors.green[500]),
                 const SizedBox(width: 5),
                 UnitText(
-                  text: product.price.isNotEmpty == true  ? formatVND(int.parse(product.price)) : "",
+                  text: formatVND(product.productPrice),
                   fontFamily: Assets.sfProMedium,
                   fontSize: 12,
                   lineThrough: true,
@@ -254,7 +251,7 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
             )
           else
             const SizedBox(height: 5),
-          UnitText(text: product.priceSale.isNotEmpty == true ? "${formatVND(int.parse(product.priceSale))} VNĐ" : "", fontFamily: Assets.sfProMedium, fontWeight: FontWeight.w700, fontSize: 16),
+          UnitText(text: "${formatVND(product.productPriceSale)} VNĐ", fontFamily: Assets.sfProMedium, fontWeight: FontWeight.w700, fontSize: 16),
         ],
       ),
     );
@@ -300,5 +297,11 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _categoryScrollController.dispose();
+    super.dispose();
   }
 }

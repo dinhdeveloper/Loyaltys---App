@@ -1,39 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:remindbless/core/app_assets.dart';
 import 'package:remindbless/core/app_theme.dart';
+import 'package:remindbless/core/base_screen.dart';
 import 'package:remindbless/core/path_router.dart';
 import 'package:remindbless/data/models/products/product_item.dart';
-import 'package:remindbless/presentation/widgets/common/app_loading.dart';
 import 'package:remindbless/presentation/widgets/common/unit_text.dart';
+import 'package:remindbless/viewmodel/home_viewmodel.dart';
 import 'extension_screen/extension_home_child_screen.dart';
 import 'extension_screen/extension_home_screen.dart';
 import 'extension_screen/widget_grid_product.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends BaseScreen<HomeViewModel> {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => HomeScreenState();
+  State<BaseScreen<HomeViewModel>> createState() => HomeScreenState();
 }
 
-class HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
+class HomeScreenState extends BaseScreenState<HomeViewModel, HomeScreen> with SingleTickerProviderStateMixin{
+  @override
+  void initFunction() {
+    provider.fetchCategories();
+  }
   List<ProductItem> listProduct = [];
   List<StoryItem> listStory = [];
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _initLoad();
+    //_initLoad();
   }
 
   Future<void> _initLoad() async {
-    AppLoading.show();
-    try {
-      await Future.delayed(const Duration(milliseconds: 400));
-      await _loadProducts();
-    } finally {
-      AppLoading.dismiss();
-    }
+    await _loadProducts();
   }
 
   Future<void> _loadProducts() async {
@@ -44,7 +43,7 @@ class HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMi
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildChild(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final double iconBoxSize = width > 600 ? 88 : 66;
     final double iconImageSize = iconBoxSize * 0.62;
