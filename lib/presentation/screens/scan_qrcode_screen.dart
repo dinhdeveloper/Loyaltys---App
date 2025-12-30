@@ -35,7 +35,7 @@ class _ScanQrCodeScreenState extends State<ScanQrCodeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
       body: SafeArea(
         bottom: false,
         child: Column(

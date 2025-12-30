@@ -1,4 +1,5 @@
 import 'package:remindbless/core/app_assets.dart';
+import 'package:remindbless/data/models/category/category_model.dart';
 
 class HomeCategoryItem {
   final String idCategory;

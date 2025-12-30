@@ -15,19 +15,15 @@ class HeaderDelegate extends SliverPersistentHeaderDelegate {
   double get maxExtent => 50;
 
   @override
-  Widget build(
-      BuildContext context,
-      double shrinkOffset,
-      bool overlapsContent,
-      ) {
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
-      color: Colors.white,
+      color: Colors.transparent,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       alignment: Alignment.centerLeft,
       child: UnitText(
         text: title,
         color: AppColors.colorButtonBold,
-        fontSize: 20,
+        fontSize: 18,
         fontFamily: Assets.sfProSemibold,
       ),
     );

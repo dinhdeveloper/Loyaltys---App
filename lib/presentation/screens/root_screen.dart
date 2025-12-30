@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:remindbless/core/app_assets.dart';
+import 'package:remindbless/presentation/providers/background_controller.dart';
 import 'package:remindbless/presentation/screens/cart_screen.dart';
 import 'package:remindbless/presentation/screens/scan_qrcode_screen.dart';
 import 'package:remindbless/presentation/screens/search_screen.dart';
 import 'package:remindbless/presentation/screens/setting_screen.dart';
+import 'package:remindbless/presentation/widgets/common/common_glass.dart';
 import 'package:remindbless/presentation/widgets/common/unit_text.dart';
 
 import 'history_point_screen.dart';
@@ -23,6 +26,8 @@ class _RootScreenState extends State<RootScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final bgController = context.watch<BackgroundController>();
+
     final screens = [
       HomeScreen(key: _homeKey),
       HistoryPointScreen(),
@@ -31,25 +36,27 @@ class _RootScreenState extends State<RootScreen> {
       SettingScreen(),
     ];
 
-    return Scaffold(
-      extendBody: true,
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.transparent,
-      body: Stack(
-        children: [
-          // Màn hình chính - full screen
-          Positioned.fill(
-            child: screens[_currentIndex],
-          ),
-
-          // Bottom Navigation nổi lên trên
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: _buildBottomNavigationBar(),
-          ),
-        ],
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: bgController.background,
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Scaffold(
+        extendBody: true,
+        backgroundColor: Colors.transparent,
+        body: Stack(
+          children: [
+            Positioned.fill(child: screens[_currentIndex]),
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: _buildBottomNavigationBar(),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -57,25 +64,9 @@ class _RootScreenState extends State<RootScreen> {
   Widget _buildBottomNavigationBar() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-      child: Container(
+      child: CommonGlass(
         height: 60,
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.95),
-          borderRadius: BorderRadius.circular(30),
-          border: Border.all(
-            color: Colors.grey.withOpacity(0.2),
-            width: 0.5,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 2,
-              spreadRadius: 0,
-              offset: const Offset(0, 0),
-            ),
-          ],
-        ),
+        colorBlur: Colors.white12,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -107,7 +98,7 @@ class _RootScreenState extends State<RootScreen> {
             UnitText(text: title, fontSize: 10,
               fontFamily: Assets.sfProLight,
               fontWeight: isSelected ? FontWeight.w900 : FontWeight.w600,
-              color: isSelected ? Colors.black : Colors.grey,
+              color: isSelected ? Colors.white : Colors.grey,
             )
           ],
         ),

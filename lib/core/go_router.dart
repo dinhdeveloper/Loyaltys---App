@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:remindbless/admin/admin_category/admin_categories_screen.dart';
+import 'package:remindbless/admin/admin_dash_board_screen.dart';
+import 'package:remindbless/admin/admin_product/admin_products_screen.dart';
 import 'package:remindbless/core/path_router.dart';
 import 'package:remindbless/presentation/screens/cart_screen.dart';
 import 'package:remindbless/presentation/screens/category_list_screen.dart';
@@ -12,6 +15,14 @@ import 'package:remindbless/presentation/screens/verify_otp_screen.dart';
 class Routers {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case PathRouter.adminDashboard:
+        return MaterialPageRoutePlus(builder: (_) => const AdminDashBoardScreen());
+      case PathRouter.adminCategories:
+        return MaterialPageRoutePlus(builder: (_) => const AdminCategoriesScreen());
+      case PathRouter.adminProducts:
+        return MaterialPageRoutePlus(builder: (_) => const AdminProductsScreen());
+
+
       case PathRouter.rootScreen:
         return MaterialPageRoutePlus(builder: (_) => const RootScreen());
       case PathRouter.loginScreen:

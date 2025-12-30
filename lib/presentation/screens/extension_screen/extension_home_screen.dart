@@ -7,6 +7,7 @@ import 'package:remindbless/core/path_router.dart';
 import 'package:remindbless/data/models/data_home.dart';
 import 'package:remindbless/presentation/screens/home_screen.dart';
 import 'package:remindbless/presentation/widgets/common/app_image.dart';
+import 'package:remindbless/presentation/widgets/common/common_glass.dart';
 import 'package:remindbless/presentation/widgets/common/unit_text.dart';
 import 'package:remindbless/viewmodel/category_viewmodel.dart';
 
@@ -147,7 +148,7 @@ extension ExHomeScreen on HomeScreenState{
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.withOpacity(0.3), width: 1.0),
+                  border: Border.all(color: Colors.white, width: 1.0),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(
@@ -185,7 +186,7 @@ extension ExHomeScreen on HomeScreenState{
           Container(
             padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey.withOpacity(0.3), width: 1.0),
+              border: Border.all(color: Colors.white, width: 1.0),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Row(
@@ -288,21 +289,21 @@ class IconTile extends StatelessWidget {
     return Column(
       children: [
         // Icon box with shadow and rounded corners
-        Container(
+        CommonGlass(
           width: boxSize,
           height: boxSize,
-          padding: EdgeInsets.zero,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.06),
-                blurRadius: 6,
-                offset: const Offset(0, 3),
-              )
-            ],
-          ),
+          // padding: EdgeInsets.zero,
+          // decoration: BoxDecoration(
+          //   color: Colors.white,
+          //   borderRadius: BorderRadius.circular(12),
+          //   boxShadow: [
+          //     BoxShadow(
+          //       color: Colors.black.withOpacity(0.06),
+          //       blurRadius: 6,
+          //       offset: const Offset(0, 3),
+          //     )
+          //   ],
+          // ),
           child: AppImage(
             imageUrl: assetPath,
             width: imageSize,

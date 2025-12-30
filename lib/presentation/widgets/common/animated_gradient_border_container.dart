@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:remindbless/presentation/widgets/common/common_glass.dart';
 
 class AnimatedGradientBorderContainer extends StatefulWidget {
   final double width;
@@ -52,10 +53,10 @@ class _AnimatedGradientBorderContainerState extends State<AnimatedGradientBorder
             borderWidth: widget.borderWidth,
             gradientColors: widget.gradientColors, // ← truyền vào painter
           ),
-          child: Container(
+          child: CommonGlass(
             width: widget.width,
             height: widget.height,
-            alignment: Alignment.center,
+            //alignment: Alignment.center,
             child: widget.child,
           ),
         );

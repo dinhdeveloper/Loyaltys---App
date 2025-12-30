@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:remindbless/core/app_assets.dart';
 import 'package:remindbless/core/app_theme.dart';
 import 'package:remindbless/data/models/history_point/history_point.dart';
+import 'package:remindbless/presentation/widgets/common/common_glass.dart';
 import 'package:remindbless/presentation/widgets/common/header_delegate.dart';
 import 'package:remindbless/presentation/widgets/common/unit_text.dart';
 import 'dart:convert';
@@ -45,7 +46,7 @@ class _HistoryPointScreenState extends State<HistoryPointScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
       body: SafeArea(
         bottom: false,
         child: CustomScrollView(
@@ -71,7 +72,7 @@ class _HistoryPointScreenState extends State<HistoryPointScreen> {
                 SliverToBoxAdapter(
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                    color: Colors.white,
+                    color: Colors.transparent,
                     child: UnitText(
                       text: day.date,
                       fontSize: 13,
@@ -106,50 +107,48 @@ class _HistoryPointScreenState extends State<HistoryPointScreen> {
 
   // ================= REAL ITEM =================
   Widget _buildHistoryItem(HistoryItem item) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-      decoration: BoxDecoration(
-        color: Colors.grey[100],
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.black12, width: 0.5),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.asset(
-              Assets.imgNotification3d,
-              width: 32,
-              height: 32,
-            ),
-            const SizedBox(width: 6),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  UnitText(
-                    text: item.title,
-                    fontFamily: Assets.sfProRegular,
-                    fontSize: 15,
-                    color: Colors.green,
-                  ),
-                  const SizedBox(height: 5),
-                  UnitText(
-                    text: item.desc,
-                    maxLines: 2,
-                    fontFamily: Assets.sfProLight,
-                  ),
-                  const SizedBox(height: 5),
-                  UnitText(
-                    text: item.time,
-                    fontSize: 15,
-                    color: Colors.black45,
-                  ),
-                ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+      child: CommonGlass(
+        height: 115,
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Image.asset(
+                Assets.imgNotification3d,
+                width: 32,
+                height: 32,
               ),
-            ),
-          ],
+              const SizedBox(width: 6),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    UnitText(
+                      text: item.title,
+                      fontFamily: Assets.sfProRegular,
+                      fontSize: 15,
+                      color: Colors.green,
+                    ),
+                    const SizedBox(height: 5),
+                    UnitText(
+                      text: item.desc,
+                      maxLines: 2,
+                      fontFamily: Assets.sfProLight,
+                    ),
+                    const SizedBox(height: 5),
+                    UnitText(
+                      text: item.time,
+                      fontSize: 15,
+                      color: Colors.black45,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -157,35 +156,32 @@ class _HistoryPointScreenState extends State<HistoryPointScreen> {
 
   // ================= SHIMMER ITEM (MATCH 1–1) =================
   Widget _buildHistoryItemShimmer() {
-    return Container(
-      height: 100,
-      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: Colors.grey[100],
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.black12, width: 0.5),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _shimmerBox(32, 32),
-          const SizedBox(width: 6),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _shimmerLine(width: 140, height: 14), // title
-                const SizedBox(height: 10),
-                _shimmerLine(height: 12),
-                const SizedBox(height: 8),
-                _shimmerLine(width: 180, height: 12), // desc
-                const SizedBox(height: 8),
-                _shimmerLine(width: 80, height: 12), // time
-              ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+      child: CommonGlass(
+        height: 100,
+        paddingChild: 8,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _shimmerBox(32, 32),
+            const SizedBox(width: 6),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _shimmerLine(width: 140, height: 14), // title
+                  const SizedBox(height: 10),
+                  _shimmerLine(height: 12),
+                  const SizedBox(height: 8),
+                  _shimmerLine(width: 180, height: 12), // desc
+                  const SizedBox(height: 8),
+                  _shimmerLine(width: 80, height: 12), // time
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

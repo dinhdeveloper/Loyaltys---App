@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobkit_dashed_border/mobkit_dashed_border.dart';
+import 'package:provider/provider.dart';
 import 'package:remindbless/core/app_assets.dart';
 import 'package:remindbless/core/app_theme.dart';
 import 'package:remindbless/core/base_screen.dart';
 import 'package:remindbless/core/path_router.dart' show PathRouter;
 import 'package:remindbless/data/models/category/category_model.dart';
 import 'package:remindbless/data/models/products/product_model.dart';
+import 'package:remindbless/presentation/providers/background_controller.dart';
 import 'package:remindbless/presentation/utils/formatters.dart';
 import 'package:remindbless/presentation/widgets/common/app_image.dart';
 import 'package:remindbless/presentation/widgets/common/bottom_bar_widget.dart';
@@ -84,22 +86,30 @@ class _CategoryListScreenState extends BaseScreenState<CategoryViewModel, Catego
   // ---------------- UI ----------------
   @override
   Widget buildChild(BuildContext context) {
+    final bgController = context.watch<BackgroundController>();
     final currentCategory = lisCategory[_selectedIndex];
-
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        bottom: false,
-        child: Column(
-          children: [
-            _buildHeader(currentCategory.categoryName),
-            _buildCategoryHorizontal(),
-            const SizedBox(height: 10),
-            Expanded(child: _loading ? _buildProductShimmer() : _buildProductGrid()),
-          ],
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: bgController.background,
+          fit: BoxFit.cover,
         ),
       ),
-      bottomNavigationBar: bottomBarDetail(onTap: () => Navigator.of(context).pop()),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: SafeArea(
+          bottom: false,
+          child: Column(
+            children: [
+              _buildHeader(currentCategory.categoryName),
+              _buildCategoryHorizontal(),
+              const SizedBox(height: 10),
+              Expanded(child: _loading ? _buildProductShimmer() : _buildProductGrid()),
+            ],
+          ),
+        ),
+        bottomNavigationBar: bottomBarDetail(onTap: () => Navigator.of(context).pop()),
+      )
     );
   }
 

@@ -33,7 +33,7 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
@@ -55,7 +55,7 @@ class SearchScreen extends StatelessWidget {
                   text: 'Gợi ý cho bạn',
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.colorButtonHome,
+                  color: Colors.black,
                   fontFamily: Assets.sfProMedium,
                 ),
               ),
@@ -89,7 +89,7 @@ class SearchScreen extends StatelessWidget {
   Widget _buildSearchBox(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey[100],
+        color: Colors.transparent,
         borderRadius: BorderRadius.circular(42),
         border: Border.all(color: Colors.black12, width: 0.5),
       ),
@@ -139,7 +139,7 @@ class SearchScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: UnitText(
-            text: 'Tìm kiếm gần đây', fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.colorButtonHome, fontFamily: Assets.sfProMedium
+            text: 'Tìm kiếm gần đây', fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black, fontFamily: Assets.sfProMedium
           ),
         ),
         const SizedBox(height: 15),
@@ -156,12 +156,8 @@ class SearchScreen extends StatelessWidget {
       },
       child: Padding(
         padding: const EdgeInsets.only(bottom: 10),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.grey[100],
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: Colors.black12, width: 0.5),
-          ),
+        child: CommonGlass(
+          height: 55,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             child: Row(
@@ -178,6 +174,7 @@ class SearchScreen extends StatelessWidget {
                   blur: 10,
                   width: 45,
                   height: 28,
+                  colorBlur: Colors.white12,
                   child: UnitText(text: '${search['count']}+',
                       color: Colors.black.withOpacity(0.9), fontSize: 12, fontFamily: Assets.sfProRegular
                   ),
@@ -205,12 +202,8 @@ class SearchScreen extends StatelessWidget {
           ),
         );
       },
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.grey[100],
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: Colors.black12, width: 0.5),
-        ),
+      child: CommonGlass(
+        height: 55,
         child: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -218,11 +211,11 @@ class SearchScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 UnitText(text: category['name'],
-                    color: Colors.black, fontSize: 14, fontWeight: FontWeight.w600, fontFamily: Assets.sfProMedium
+                    color: Colors.black, fontSize: 14, fontFamily: Assets.sfProRegular
                 ),
                 CommonGlass(
                   blur: 5, width: 40, height: 25, radius: 20,
-                  colorBlur: Colors.white,
+                  colorBlur: Colors.white12,
                   child: UnitText(text: category['books'],
                       color: Colors.black, fontSize: 10, fontFamily: Assets.sfProRegular
                   ),
@@ -321,7 +314,7 @@ class SearchHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Container(color: Colors.white, padding: const EdgeInsets.fromLTRB(20, 20, 20, 10), child: child);
+    return Container(color: Colors.transparent, padding: const EdgeInsets.fromLTRB(20, 20, 20, 10), child: child);
   }
 
   @override

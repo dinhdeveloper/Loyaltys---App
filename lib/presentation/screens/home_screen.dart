@@ -46,10 +46,10 @@ class HomeScreenState extends BaseScreenState<HomeViewModel, HomeScreen> with Si
   Widget buildChild(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final double iconBoxSize = width > 600 ? 88 : 66;
-    final double iconImageSize = iconBoxSize * 0.62;
+    final double iconImageSize = iconBoxSize * 0.82;
 
     return Scaffold(
-      backgroundColor: AppColors.colorButtonHome,
+      backgroundColor: Colors.transparent,
       body: SafeArea(
         bottom: false,
         child: Stack(
@@ -91,7 +91,7 @@ class HomeScreenState extends BaseScreenState<HomeViewModel, HomeScreen> with Si
                 child: ClipRRect(
                   borderRadius: const BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25)),
                   child: Container(
-                    color: Colors.white,
+                    color: Colors.transparent,
                     child: Column(
                       children: [
                         const SizedBox(height: 5),

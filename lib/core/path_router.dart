@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
 class PathRouter {
+
+  ///WEB
+  static const String adminDashboard = "adminDashboard";
+  static const String adminCategories = "adminCategories";
+  static const String adminProducts = "adminProducts";
+
+  ///MOBILE
   static const String rootScreen = "rootScreen";
   static const String loginScreen = "login";
   static const String registerScreen = "register";

@@ -19,7 +19,7 @@ extension ExHomeChild on HomeScreenState {
         width: MediaQuery.of(context).size.width,
         tearDepth: 10,
         tearFrequency: 6,
-        gradientColors: [Color(0xFFFFC05E), Colors.grey.shade100],
+        gradientColors: [Color(0xFFFFC05E), Colors.transparent],
         roundedBottom: true,
         cornerRadius: 0,
         child: Row(

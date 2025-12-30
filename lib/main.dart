@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:remindbless/core/go_router.dart';
 import 'package:remindbless/core/path_router.dart';
+import 'package:remindbless/presentation/providers/background_controller.dart';
 import 'package:remindbless/services/network_service.dart';
 
+import 'core/app_assets.dart';
 import 'core/injector.dart';
 
 
@@ -33,6 +36,9 @@ class _MainAppState extends State<MainApp> {
   void initState() {
     super.initState();
     _networkService = getIt<NetworkService>();
+    Future.microtask(() {
+      context.read<BackgroundController>().loadSavedBackground();
+    });
   }
 
   @override
@@ -58,5 +64,12 @@ class _MainAppState extends State<MainApp> {
     );
   }
 }
+
+const List<String> backgroundAssets = [
+  Assets.imgBgAdmin,
+  Assets.imgBgAdmin2,
+  Assets.imgBgAdmin3,
+  Assets.imgBgAdmin4,
+];
 
 

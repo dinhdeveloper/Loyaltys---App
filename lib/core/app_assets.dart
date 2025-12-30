@@ -74,6 +74,10 @@ class Assets{
   static const String imgBG = 'assets/images/imgBg.jpg';
   static const String imgFoodItem = 'assets/images/img_food_item.jpg';
   static const String imgBgOpen = 'assets/images/bg_open.jpg';
+  static const String imgBgAdmin = 'assets/images/bg_admin.jpg';
+  static const String imgBgAdmin2 = 'assets/images/bg_2.jpg';
+  static const String imgBgAdmin3 = 'assets/images/bg_3.jpg';
+  static const String imgBgAdmin4 = 'assets/images/bg_4.jpg';
 
 }
 
